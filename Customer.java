@@ -7,7 +7,7 @@ public class Customer{
     private String email;
     // List of tickets a customer has
     private List<Ticket> ticketList;
-    private float balance;
+    private double balance;
 
     // constructor
     public Customer{
@@ -20,7 +20,7 @@ public class Customer{
 
     // methods
     // (unsure of args atp)
-    public void bookTicket(Flight flight, Seat seat, float price){
+    public void bookTicket(Flight flight, Seat seat, double price){
         // is flight operable
             // is seat available
                 ticketList.add(ticket)
