@@ -1,3 +1,4 @@
+package model;
 public class Ticket{
     private int ticketId;
     private double price;
@@ -12,7 +13,7 @@ public class Ticket{
         this.flight = flight;
         this.customer = customer;
         this.price = price;
-        this.status = "Booked"
+        this.status = "Booked";
     }
 
     public Seat getSeat(){

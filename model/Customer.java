@@ -1,3 +1,4 @@
+package model;
 import java.util.List;
 
 public class Customer{
@@ -23,10 +24,10 @@ public class Customer{
     public void bookTicket(Flight flight, Seat seat, double price){
         // is flight operable
             // is seat available
-                ticketList.add(ticket)
+                ticketList.add(ticket);
                 balance += price;
         // else ->
-        System.out.println("This seat or flight is not available")
+        System.out.println("This seat or flight is not available");
     }
     public void cancelTicket(Ticket ticket){
         // add logic
