@@ -1,6 +1,6 @@
 package model.enums;
 
-public enum Pilot_Rank {
+public enum PilotRank {
     CAPTAIN,
     FIRST_OFFICER
 }
