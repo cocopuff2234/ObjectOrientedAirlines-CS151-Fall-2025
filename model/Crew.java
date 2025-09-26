@@ -1,10 +1,15 @@
 package model;
 import java.time.LocalDate;
 
+import model.enums.CrewStatus;
+import model.enums.PlaneType;
+import model.enums.Role;
+
 public abstract class Crew {
     private final String employeeID;
     private final String fullName;
     private final LocalDate hiredOn;
+    private CrewStatus status =  CrewStatus.AVAILABLE;
     private String baseAirport;
 
     protected Crew(String employeeID, String fullName, LocalDate hiredOn, String baseAirport) {
@@ -26,6 +31,14 @@ public abstract class Crew {
         return hiredOn;
     }
 
+    public CrewStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CrewStatus status) {
+        this.status = status;
+    }
+
     public String getBaseAirport() {
         return baseAirport;
     }
@@ -34,6 +47,31 @@ public abstract class Crew {
         this.baseAirport = baseAirport;
     }
 
+    public abstract Role getRole();
+
+    // Is crew member licensed to operate given plane type?
+    public abstract boolean canOperate(PlaneType type);
+
+    @Override
+    public int hashCode() {
+        return employeeID.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof Crew crew) && crew.employeeID.equals(this.employeeID);
+    }
+
+    @Override
+    public String toString() {
+        return "%s(%s %s)".formatted(getRole(), fullName, employeeID);
+    }
+
+    
+
+
+
+    
     
     
 }
