@@ -1,6 +1,9 @@
 package model;
 import java.time.LocalDate;
 
+import model.enums.PlaneType;
+import model.enums.Role;
+
 public abstract class Crew {
     private final String employeeID;
     private final String fullName;
@@ -34,6 +37,10 @@ public abstract class Crew {
         this.baseAirport = baseAirport;
     }
 
+    public abstract Role getRole();
+
+    // Is crew member licensed to operate given plane type?
+    public abstract boolean canOperate(PlaneType type);
     
     
 }
