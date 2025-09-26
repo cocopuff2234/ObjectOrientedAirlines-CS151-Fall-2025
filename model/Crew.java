@@ -59,7 +59,7 @@ public abstract class Crew {
 
     @Override
     public boolean equals(Object obj) {
-        return (obj instanceof Crew crew) && crew.equals(this.employeeID);
+        return (obj instanceof Crew crew) && crew.employeeID.equals(this.employeeID);
     }
 
     @Override
