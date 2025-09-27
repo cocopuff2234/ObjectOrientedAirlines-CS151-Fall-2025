@@ -37,5 +37,46 @@ public class Main{
         System.out.println("Route 3: " + route3);
         System.out.println("Route 4: " + route4);
         System.out.println("Route 5: " + route5);
+
+        // Print departure and arrival times
+        System.out.println("Flight " + flight1.getFlightNumber() + " departs at " 
+                + flight1.getDepartureUTC() + " and arrives at " + flight1.getArrivalUTC());
+        System.out.println("Flight " + flight2.getFlightNumber() + " departs at " 
+                + flight2.getDepartureUTC() + " and arrives at " + flight2.getArrivalUTC());
+        System.out.println("Flight " + flight3.getFlightNumber() + " departs at " 
+                + flight3.getDepartureUTC() + " and arrives at " + flight3.getArrivalUTC());
+        System.out.println("Flight " + flight4.getFlightNumber() + " departs at " 
+                + flight4.getDepartureUTC() + " and arrives at " + flight4.getArrivalUTC());
+        System.out.println("Flight " + flight5.getFlightNumber() + " departs at " 
+                + flight5.getDepartureUTC() + " and arrives at " + flight5.getArrivalUTC());
+
+        // Calculate flight durations in hours
+        long duration1 = java.time.Duration.between(flight1.getDepartureUTC(), flight1.getArrivalUTC()).toHours();
+        long duration2 = java.time.Duration.between(flight2.getDepartureUTC(), flight2.getArrivalUTC()).toHours();
+        long duration3 = java.time.Duration.between(flight3.getDepartureUTC(), flight3.getArrivalUTC()).toHours();
+        long duration4 = java.time.Duration.between(flight4.getDepartureUTC(), flight4.getArrivalUTC()).toHours();
+        long duration5 = java.time.Duration.between(flight5.getDepartureUTC(), flight5.getArrivalUTC()).toHours();
+
+        System.out.println("Duration flight1: " + duration1 + " hours");
+        System.out.println("Duration flight2: " + duration2 + " hours");
+        System.out.println("Duration flight3: " + duration3 + " hours");
+        System.out.println("Duration flight4: " + duration4 + " hours");
+        System.out.println("Duration flight5: " + duration5 + " hours");
+
+        // Compare departure times
+        System.out.println("Does flight1 depart before flight2? " + flight1.getDepartureUTC().isBefore(flight2.getDepartureUTC()));
+        System.out.println("Does flight3 depart after flight4? " + flight3.getDepartureUTC().isAfter(flight4.getDepartureUTC()));
+        System.out.println("End of flight time checks.");
+
+        // Find the earliest departure among all flights
+        LocalDateTime earliest = java.util.Arrays.asList(
+                //Formatted like this for the sake of being able to read w/o having to scroll
+                flight1.getDepartureUTC(), 
+                flight2.getDepartureUTC(),
+                flight3.getDepartureUTC(),
+                flight4.getDepartureUTC(),
+                flight5.getDepartureUTC()
+        ).stream().min(LocalDateTime::compareTo).orElse(null);
+        System.out.println("Earliest departure time among all flights: " + earliest);
     }
 }
