@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 
 public class Main{
     public static void main(String[] args){
+        // Made some random flight objects
         Flight flight1 = new Flight("AA001", "American Airlines", "New York", "Los Angeles",
                 LocalDateTime.of(2025, 10, 1, 14, 30),
                 LocalDateTime.of(2025, 10, 1, 17, 45));
@@ -19,19 +20,21 @@ public class Main{
                 LocalDateTime.of(2025, 10, 5, 8, 0),
                 LocalDateTime.of(2025, 10, 5, 11, 30));
 
+        // Print flights and their details
         System.out.println(flight1.getFlightNumber() + " | " + flight1.getAirline() + " | " + flight1.getOrigin() + " -> " + flight1.getDestination());
         System.out.println(flight2.getFlightNumber() + " | " + flight2.getAirline() + " | " + flight2.getOrigin() + " -> " + flight2.getDestination());
         System.out.println(flight3.getFlightNumber() + " | " + flight3.getAirline() + " | " + flight3.getOrigin() + " -> " + flight3.getDestination());
         System.out.println(flight4.getFlightNumber() + " | " + flight4.getAirline() + " | " + flight4.getOrigin() + " -> " + flight4.getDestination());
         System.out.println(flight5.getFlightNumber() + " | " + flight5.getAirline() + " | " + flight5.getOrigin() + " -> " + flight5.getDestination());
 
-
+        // Print flight origin and destination
         String route1 = flight1.getOrigin() + " to " + flight1.getDestination();
         String route2 = flight2.getOrigin() + " to " + flight2.getDestination();
         String route3 = flight3.getOrigin() + " to " + flight3.getDestination();
         String route4 = flight4.getOrigin() + " to " + flight4.getDestination();
         String route5 = flight5.getOrigin() + " to " + flight5.getDestination();
 
+        // Print routes
         System.out.println("Route 1: " + route1);
         System.out.println("Route 2: " + route2);
         System.out.println("Route 3: " + route3);
@@ -57,6 +60,7 @@ public class Main{
         long duration4 = java.time.Duration.between(flight4.getDepartureUTC(), flight4.getArrivalUTC()).toHours();
         long duration5 = java.time.Duration.between(flight5.getDepartureUTC(), flight5.getArrivalUTC()).toHours();
 
+        //Print duration
         System.out.println("Duration flight1: " + duration1 + " hours");
         System.out.println("Duration flight2: " + duration2 + " hours");
         System.out.println("Duration flight3: " + duration3 + " hours");
