@@ -36,7 +36,7 @@ public class Pilot extends Crew {
 
 
     public Set<PlaneType> getTypeRatings() {
-        return Collections.unmodifiableSet(PlaneType);
+        return Collections.unmodifiableSet(typeRatings);
     }
 
     // If a pilot gains new certification, we need to add a new type rating
