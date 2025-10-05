@@ -1,3 +1,5 @@
+package model;
+
 import model.Crew;
 import model.enums.PlaneType;
 import model.enums.Role;
