@@ -7,6 +7,12 @@ import model.enums.CrewStatus;
 
 import java.time.LocalDate;
 import java.util.*;
+
+/**
+ * Represents aPilot who is a type of crew member.
+ * Each attendant has a position (Captain/First officer) and certifications
+ * for which aircraft types they can fly.
+ */
 public class Pilot extends Crew {
     private PilotRank rank;
     private final Set<PlaneType> typeRatings = new HashSet<>(); 
