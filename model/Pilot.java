@@ -37,11 +37,20 @@ public class Pilot extends Crew {
         return Collections.unmodifiableSet(PlaneType);
     }
 
+    // If a pilot gains new certification, we need to add a new type rating
+    public void addTypeRating(PlaneType type){
+        typeRatings.add(type);
+    }
+
 
     public int getTotalFlightHours() {
         return totalFlightHours;
     }
 
+    // No need for flight hours setter, but we add flight hours after each flight
+    public void addFlightHours(int hours){
+        totalFlightHours += Math.min(0, hours);
+    }
 
 
     @Override
