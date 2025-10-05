@@ -32,7 +32,32 @@ public class FlightAttendant extends Crew {
             FAPosition position, Collection<PlaneType> qualifcations) {
         super(employeeID, fullName, hiredOn, baseAirport);
         this.position = Objects.requireNonNull(position);
+
+        if (qualifcations != null) {
+            cabinQualifications.addAll(qualifcations);
+        }
     }
+
+
+
+    // ---------------- Getters / Setters ----------------
+    public FAPosition getPosition() {
+        return position;
+    }
+
+    public void setPosition(FAPosition position) {
+        this.position = Objects.requireNonNull(position);
+    }
+
+    public Set<PlaneType> getCabinQualifications() {
+        return Collections.unmodifiableSet(cabinQualifications);
+    }
+
+    // Check if crew has training for plane type
+    public void addCabinQualification(PlaneType type){
+        cabinQualifications.add(type);
+    }
+    
 
     
 
