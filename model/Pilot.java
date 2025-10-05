@@ -43,10 +43,6 @@ public class Pilot extends Crew {
     }
 
 
-    public void setTotalFlightHours(int totalFlightHours) {
-        this.totalFlightHours = totalFlightHours;
-    }
-
 
     @Override
     public boolean canOperate(PlaneType type) {
