@@ -53,9 +53,21 @@ public class FlightAttendant extends Crew {
         return Collections.unmodifiableSet(cabinQualifications);
     }
 
-    // Check if crew has training for plane type
+    // If cabin crew has completed training for plane type
     public void addCabinQualification(PlaneType type){
         cabinQualifications.add(type);
+    }
+
+    // ---------------- Abstract Overrides from Crew ----------------
+
+    @Override
+    public Role getRole() {
+        return Role.FLIGHT_ATTENDANT;
+    }
+
+    @Override
+    public boolean canOperate(PlaneType type) {
+        return getStatus() == CrewStatus.AVAILABLE && cabinQualifications.contains(type);
     }
     
 
