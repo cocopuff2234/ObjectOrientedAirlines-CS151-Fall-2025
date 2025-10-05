@@ -29,7 +29,7 @@ public class Pilot extends Crew {
 
 
     public void setRank(PilotRank rank) {
-        this.rank = rank;
+        this.rank = Objects.requireNonNull(rank);
     }
 
 
@@ -65,6 +65,24 @@ public class Pilot extends Crew {
         // Implements abstract from crew, either CAPTAIN or FIRST OFFICER
         return Role.PILOT;
     }
+
+
+    @Override
+    public String toString() {
+        return "Pilot {" + 
+                "name:' " + getFullName() + '\'' +
+                ", id: '" + getEmployeeID() +  '\'' +
+                ", rank: '" + getRank() + '\'' +
+                ", ratings: '" + getTypeRatings() + '\'' +
+                ", hours: '" + getTotalFlightHours() + '\''+
+                "}";
+
+    }
+
+
+    
+
+    
 
     
 
