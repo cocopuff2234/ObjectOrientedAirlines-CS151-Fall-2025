@@ -69,6 +69,18 @@ public class FlightAttendant extends Crew {
     public boolean canOperate(PlaneType type) {
         return getStatus() == CrewStatus.AVAILABLE && cabinQualifications.contains(type);
     }
+
+    @Override
+    public String toString() {
+        return "FlightAttendant {" + 
+                "name:' " + getFullName() + '\'' +
+                ", id: '" + getEmployeeID() +  '\'' +
+                ", position: '" + getPosition() + '\'' +
+                ", qualifications: '" + getCabinQualifications() + '\'' +
+                ", status: '" + getStatus() + '\''+
+                "}";
+
+    }
     
 
     
