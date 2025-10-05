@@ -19,6 +19,24 @@ public class Pilot extends Crew {
     private int totalFlightHours;
 
 
+    
+    /**
+     * Constructs a new Pilot object.
+     *
+     * @param employeeId       the unique ID for this pilot
+     * @param fullName         the pilot's full name
+     * @param hiredOn          the date the pilot was hired
+     * @param baseAirport      the airport this pilot is based at
+     * @param rank             the pilot's current rank (CAPTAIN or FIRST_OFFICER)
+     * @param ratings          a collection of aircraft types the pilot is certified to operate
+     * @param totalFlightHours the total flight hours the pilot has accumulated
+     *
+     * <p>
+     * The constructor initializes all required crew and pilot-specific fields.
+     * It ensures that rank and other non-nullable parameters are validated,
+     * and uses defensive copying for collections to prevent external modification.
+     * </p>
+     */
     public Pilot(String employeeID, String fullName, LocalDate hiredOn, String baseAirport, PilotRank rank,
                 Collection<PlaneType> ratings, int totalFlightHours) {
         super(employeeID, fullName, hiredOn, baseAirport);
@@ -29,6 +47,7 @@ public class Pilot extends Crew {
         this.totalFlightHours = Math.max(0, totalFlightHours);
     }
 
+    // ---------------- Getters and Setters ----------------
 
     public PilotRank getRank() {
         return rank;
@@ -59,6 +78,7 @@ public class Pilot extends Crew {
         totalFlightHours += Math.min(0, hours);
     }
 
+    // ---------------- Abstract Overrides from Crew ----------------
 
     @Override
     public boolean canOperate(PlaneType type) {
