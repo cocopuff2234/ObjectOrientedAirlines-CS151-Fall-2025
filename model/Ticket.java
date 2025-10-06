@@ -25,7 +25,7 @@ public class Ticket{
     }
 
     public Customer getCustomer(){
-        return Customer;
+        return customer;
     }
 
     public void purchase(){

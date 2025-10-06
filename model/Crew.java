@@ -1,4 +1,5 @@
 package model;
+
 import java.time.LocalDate;
 
 import model.enums.CrewStatus;
@@ -6,14 +7,14 @@ import model.enums.PlaneType;
 import model.enums.Role;
 
 public abstract class Crew {
-    private final String employeeID;
+    private final String employeeId;
     private final String fullName;
     private final LocalDate hiredOn;
-    private CrewStatus status =  CrewStatus.AVAILABLE;
+    private CrewStatus status = CrewStatus.AVAILABLE;
     private String baseAirport;
 
-    protected Crew(String employeeID, String fullName, LocalDate hiredOn, String baseAirport) {
-        this.employeeID = employeeID;
+    protected Crew(String employeeId, String fullName, LocalDate hiredOn, String baseAirport) {
+        this.employeeId = employeeId;
         this.fullName = fullName;
         this.hiredOn = hiredOn;
         this.baseAirport = baseAirport;
@@ -67,11 +68,4 @@ public abstract class Crew {
         return "%s(%s %s)".formatted(getRole(), fullName, employeeID);
     }
 
-    
-
-
-
-    
-    
-    
 }
