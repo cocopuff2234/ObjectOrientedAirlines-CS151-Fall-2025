@@ -6,11 +6,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import model.core.Notifiable;
 import model.enums.CrewStatus;
 import model.enums.PilotRank;
 import model.enums.PlaneType;
 
-public class Flight {
+public class Flight implements Notifiable{
     private final String flightNumber;
     private final String airline;
     private final String origin;
@@ -113,6 +114,11 @@ public class Flight {
         return Duration.between(departureUTC, arrivalUTC);
     }
 
+    @Override
+    public void notify(String message) {
+        System.out.println("[Flight " + flightNumber + "] " + message);
+    }
+
     // Delay a flight by n (> 0) minutes
     public void delayByMinutes(long minutes){
         require(minutes >= 0, "Minutes must not be negative (< 0)");
@@ -120,7 +126,7 @@ public class Flight {
         arrivalUTC = arrivalUTC.plusMinutes(minutes);
     }
 
-    // Possible TODO: Implement Notifiable?
+    // Possible TODO: Account for Notifiable using notify
     public void changeGate(String newGate){
         this.gate = Objects.requireNonNull(newGate);
     }
@@ -157,6 +163,8 @@ public class Flight {
         return Objects.equals(flightNumber, other.flightNumber) 
             && Objects.equals(departureUTC, other.departureUTC);
     }
+
+
     
     
 
