@@ -20,7 +20,7 @@ public abstract class Crew {
         this.baseAirport = baseAirport;
     }
 
-    public String getEmployeeID() { return employeeId; }
+    public String getEmployeeId() { return employeeId; }
     public String getFullName() { return fullName; }
     public LocalDate getHiredOn() { return hiredOn; }
     public CrewStatus getStatus() { return status; }
