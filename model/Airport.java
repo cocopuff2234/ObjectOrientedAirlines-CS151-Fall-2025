@@ -1,6 +1,7 @@
 package model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -102,11 +103,10 @@ public class Airport {
 
     /** Two datetimes are considered the same "slot" if year, month, day, hour, and minute are all equal. */
     private static boolean sameMinute(LocalDateTime a, LocalDateTime b) {
-        return a.getYear()  == b.getYear()  &&
-               a.getMonth() == b.getMonth() &&
-               a.getDayOfMonth() == b.getDayOfMonth() &&
-               a.getHour() == b.getHour() &&
-               a.getMinute() == b.getMinute();
+        Objects.requireNonNull(a, "a");
+        Objects.requireNonNull(b, "b");
+        return a.truncatedTo(ChronoUnit.MINUTES)
+            .equals(b.truncatedTo(ChronoUnit.MINUTES));
     }
 
     @Override public boolean equals(Object o) {
