@@ -1,4 +1,5 @@
 package model;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,8 +15,8 @@ public class Flight {
     private final String airline;
     private final String origin;
     private final String destination;
-    private final LocalDateTime departureUTC;
-    private final LocalDateTime arrivalUTC;
+    private LocalDateTime departureUTC;
+    private LocalDateTime arrivalUTC;
     private String gate;
     private final PlaneType planeType;
     private Pilot captain;
@@ -108,9 +109,16 @@ public class Flight {
         return captain != null && firstOfficer != null && attendants.size() >= minAttendants;
     }
 
+    public Duration getDuration(){
+        return Duration.between(departureUTC, arrivalUTC);
+    }
 
-
-
+    // Delay a flight by n (> 0) minutes
+    public void delayByMinutes(long minutes){
+        require(minutes >= 0, "Minutes must not be negative (< 0)");
+        departureUTC = departureUTC.plusMinutes(minutes);
+        arrivalUTC = arrivalUTC.plusMinutes(minutes);
+    }
 
 
 
