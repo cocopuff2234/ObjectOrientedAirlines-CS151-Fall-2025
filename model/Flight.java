@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import model.enums.CrewStatus;
+import model.enums.PilotRank;
 import model.enums.PlaneType;
 
 public class Flight {
@@ -72,6 +74,21 @@ public class Flight {
     public int getMinAttendants() { return minAttendants; }
 
     // -------- Crew assignment methods -------- 
+    public void assignCaptain(Pilot p){
+        require(p != null, "Captain assignment must not be NULL");
+        require(p.getStatus() == CrewStatus.AVAILABLE, "Captain must not be ON LEAVE or SUSPENDED");
+        require(p.getRank() == PilotRank.CAPTAIN, "Captain must have rank CAPTAIN");
+        require(p.canOperate(planeType), "Captain lacks type rating for Aircraft: " + planeType);
+        this.captain = p;
+    }
+
+    public void assignFirstOfficer(Pilot p){
+        require(p != null, "First Officer assignment must not be NULL");
+        require(p.getStatus() == CrewStatus.AVAILABLE, "First Officer must not be ON LEAVE or SUSPENDED");
+        require(p.getRank() == PilotRank.FIRST_OFFICER, "First Officer must have rank FIRST OFFICER");
+        require(p.canOperate(planeType), "First Officer lacks type rating for Aircraft: " + planeType);
+        this.firstOfficer = p;
+    }
 
 
 
