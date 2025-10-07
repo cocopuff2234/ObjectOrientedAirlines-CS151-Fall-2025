@@ -130,7 +130,7 @@ public class Flight implements Notifiable{
         departureUTC = departureUTC.plusMinutes(minutes);
         arrivalUTC = arrivalUTC.plusMinutes(minutes);
 
-            // Notify the change
+        // Notify the change
         notifyWithPrefix("Delay", String.format(
             "Flight %s delayed by %d minute%s (Departure: %s → %s, Arrival: %s → %s)",
             flightNumber,
