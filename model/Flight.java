@@ -90,6 +90,18 @@ public class Flight {
         this.firstOfficer = p;
     }
 
+    public void addAttendant(FlightAttendant fa){
+        require(fa != null, "Flight attendant must not be NULL");
+        require(fa.getStatus() == CrewStatus.AVAILABLE, "Flight Attendant must not be ON LEAVE or SUSPENDED");
+        require(fa.canOperate(planeType), "Flight attendant not qualified for Aircraft: " + planeType);
+        require(!attendants.contains(fa), "attendant already assigned");
+        attendants.add(fa);
+    }
+
+    // boolean to make sure attendant is even assigned prior to removal
+    public boolean removeAttendant(FlightAttendant fa){
+        return attendants.remove(fa);
+    }
 
 
 
