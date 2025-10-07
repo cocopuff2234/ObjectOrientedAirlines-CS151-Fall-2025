@@ -106,7 +106,7 @@ public class Flight implements Notifiable{
     }
 
     // Check if adequate crew is assigned to the flight
-    public boolean isCrewComplete(){
+    public boolean hasRequiredCrew(){
         return captain != null && firstOfficer != null && attendants.size() >= minAttendants;
     }
 
@@ -121,7 +121,7 @@ public class Flight implements Notifiable{
 
     // Delay a flight by n (> 0) minutes
     public void delayByMinutes(long minutes){
-        require(minutes >= 0, "Minutes must not be negative (< 0)");
+        require(minutes > 0, "Minutes must not be negative (< 0)");
 
         // Store old values for context
         LocalDateTime oldDeparture = departureUTC;
