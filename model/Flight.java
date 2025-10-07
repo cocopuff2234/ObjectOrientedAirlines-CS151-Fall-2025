@@ -20,30 +20,18 @@ public class Flight {
     private final List<FlightAttendant> attendants = new ArrayList<>();
     private final int minAttendants;
 
-    
-
-    /* 
-    public Flight(String flightNumber, String airline, String origin, String destination, LocalDateTime departureUTC, LocalDateTime arrivalUTC) {
-        this.flightNumber = flightNumber;
-        this.airline = airline;
-        this.origin = origin;
-        this.destination = destination;
-        this.departureUTC = departureUTC;
-        this.arrivalUTC = arrivalUTC;
-        this.planeType = Objects.requireNonNull(planeType);
-    }
-    */
 
     public Flight(String flightNumber, String airline, String origin, String destination, LocalDateTime departureUTC,
             LocalDateTime arrivalUTC, PlaneType planeType, int minAttendants) {
-        this.flightNumber = flightNumber;
-        this.airline = airline;
-        this.origin = origin;
-        this.destination = destination;
-        this.departureUTC = departureUTC;
-        this.arrivalUTC = arrivalUTC;
-        this.planeType = planeType;
-        this.minAttendants = minAttendants;
+        this.flightNumber = Objects.requireNonNull(flightNumber);
+        this.airline = Objects.requireNonNull(airline);
+        this.origin = Objects.requireNonNull(origin);
+        this.destination = Objects.requireNonNull(destination);
+        this.departureUTC = Objects.requireNonNull(departureUTC);
+        this.arrivalUTC = Objects.requireNonNull(arrivalUTC);
+        this.planeType = Objects.requireNonNull(planeType);
+        this.minAttendants = Math.max(1, minAttendants);
+        // require(!arrivalUTC.isBefore(departureUTC), "Arrival time must be after Departure time!") ;
     }
     public String getFlightNumber() { return flightNumber; }
     public String getAirline() { return airline; }
