@@ -8,6 +8,7 @@ public class Flight {
     private final String destination;
     private final LocalDateTime departureUTC;
     private final LocalDateTime arrivalUTC;
+    private String gate;
 
     public Flight(String flightNumber, String airline, String origin, String destination, LocalDateTime departureUTC, LocalDateTime arrivalUTC) {
         this.flightNumber = flightNumber;
@@ -18,31 +19,13 @@ public class Flight {
         this.arrivalUTC = arrivalUTC;
     }
 
-    public String getFlightNumber() {
-        return flightNumber;
-    }
-
-    public String getAirline() {
-        return airline;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public LocalDateTime getDepartureUTC() {
-        return departureUTC;
-    }
-
-    public LocalDateTime getArrivalUTC() {
-        return arrivalUTC;
-    }
-
-    
-
+    public String getFlightNumber() { return flightNumber; }
+    public String getAirline() { return airline; }
+    public String getOrigin() { return origin; }
+    public String getDestination() { return destination; }
+    public LocalDateTime getDepartureUTC() { return departureUTC; }
+    public LocalDateTime getArrivalUTC() { return arrivalUTC; }
+    public String getGate() { return gate; }
+    public void setGate(String gate) { this.gate = gate; }
 
 }
