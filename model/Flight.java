@@ -125,23 +125,37 @@ public class Flight {
         this.gate = Objects.requireNonNull(newGate);
     }
 
-
     // UTILITY: Require method for validation throughout this class
     private static void require(boolean condition, String message){
         if (!condition) { throw new IllegalArgumentException(message); }
     }
 
     @Override
+    public String toString() {
+        return """
+            %s %s: %s → %s  (%s)
+            Departs: %s Arrives: %s Gate: %s
+            Captain: %s | First Officer: %s | Flight Attendants: %d
+            Crew Complete: %s
+            """.formatted(
+                airline, flightNumber, origin, destination, planeType,
+                departureUTC, arrivalUTC, gate,
+                captain != null ? captain.getFullName() : "—",
+                firstOfficer != null ? firstOfficer.getFullName() : "—",
+                attendants.size(),  isCrewComplete()
+            );
+    }
+    @Override
     public int hashCode() {
         return Objects.hash(flightNumber, departureUTC);
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof Flight other)) return false; 
         return Objects.equals(flightNumber, other.flightNumber) 
             && Objects.equals(departureUTC, other.departureUTC);
-
     }
     
     
