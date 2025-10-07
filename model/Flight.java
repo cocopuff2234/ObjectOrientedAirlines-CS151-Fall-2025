@@ -21,7 +21,28 @@ public class Flight {
     private final List<FlightAttendant> attendants = new ArrayList<>();
     private final int minAttendants;
 
-
+    /**
+     * Constructs a new Flight object that represents a scheduled airline flight.
+     *
+     * @param flightNumber   the unique flight identifier (e.g., "UA 1")
+     * @param airline        the name of the operating airline
+     * @param origin         the departure airport code (e.g., "SFO")
+     * @param destination    the arrival airport code (e.g., "SIN")
+     * @param departureUTC   the UTC date and time of departure
+     * @param arrivalUTC     the UTC date and time of arrival
+     * @param planeType      the aircraft type assigned to the flight
+     * @param minAttendants  the minimum number of flight attendants required
+     *
+     * <p>
+     * This constructor initializes the flight’s identifying information, schedule,
+     * and assigned aircraft type. It also performs basic validation to ensure
+     * that required parameters are not null and that the arrival time is not before
+     * the departure time. The number of minimum attendants is normalized to at least 1.
+     * </p>
+     *
+     * @throws NullPointerException     if any required argument is {@code null}
+     * @throws IllegalArgumentException if {@code arrivalUTC} is before {@code departureUTC}
+    */
     public Flight(String flightNumber, String airline, String origin, String destination, LocalDateTime departureUTC,
             LocalDateTime arrivalUTC, PlaneType planeType, int minAttendants) {
         this.flightNumber = Objects.requireNonNull(flightNumber);
