@@ -1,8 +1,9 @@
 package model;
 
+import model.enums.PlaneType;
+
 public class Plane {
     private final String planeId;
-    // TODO: Decide if we need to implement plane type with enum
     private final PlaneType planeType;
     private final int capacity;
 
@@ -12,11 +13,7 @@ public class Plane {
         this.capacity = capacity;
     }
 
-    public String getPlaneType() {
-        return planeType;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
+    public String getPlaneId() { return planeId; }
+    public PlaneType getPlaneType() { return planeType; }
+    public int getCapacity() { return capacity; }
 }
