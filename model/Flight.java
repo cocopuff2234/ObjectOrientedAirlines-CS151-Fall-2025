@@ -53,7 +53,7 @@ public class Flight {
         this.arrivalUTC = Objects.requireNonNull(arrivalUTC);
         this.planeType = Objects.requireNonNull(planeType);
         this.minAttendants = Math.max(1, minAttendants);
-        // require(!arrivalUTC.isBefore(departureUTC), "Arrival time must be after Departure time!") ;
+        require(!arrivalUTC.isBefore(departureUTC), "Arrival time must be after Departure time!") ;
     }
     public String getFlightNumber() { return flightNumber; }
     public String getAirline() { return airline; }
@@ -82,7 +82,10 @@ public class Flight {
 
 
 
-    // VITAL: Require method for validation
+    // UTILITY: Require method for validation
+    private static void require(boolean condition, String message){
+        if (!condition) { throw new IllegalArgumentException(message); }
+    }
     
 
 
