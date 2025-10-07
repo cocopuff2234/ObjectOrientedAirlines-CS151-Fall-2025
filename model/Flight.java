@@ -103,6 +103,10 @@ public class Flight {
         return attendants.remove(fa);
     }
 
+    // Check if adequate crew is assigned to the flight
+    public boolean isCrewComplete(){
+        return captain != null && firstOfficer != null && attendants.size() >= minAttendants;
+    }
 
 
 
@@ -111,7 +115,8 @@ public class Flight {
 
 
 
-    // UTILITY: Require method for validation
+
+    // UTILITY: Require method for validation throughout this class
     private static void require(boolean condition, String message){
         if (!condition) { throw new IllegalArgumentException(message); }
     }
