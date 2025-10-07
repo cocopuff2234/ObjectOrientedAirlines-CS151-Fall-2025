@@ -120,14 +120,30 @@ public class Flight {
         arrivalUTC = arrivalUTC.plusMinutes(minutes);
     }
 
-
-
+    // Possible TODO: Implement Notifiable?
+    public void changeGate(String newGate){
+        this.gate = Objects.requireNonNull(newGate);
+    }
 
 
     // UTILITY: Require method for validation throughout this class
     private static void require(boolean condition, String message){
         if (!condition) { throw new IllegalArgumentException(message); }
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(flightNumber, departureUTC);
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Flight other)) return false; 
+        return Objects.equals(flightNumber, other.flightNumber) 
+            && Objects.equals(departureUTC, other.departureUTC);
+
+    }
+    
     
 
 
