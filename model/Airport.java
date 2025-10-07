@@ -1,10 +1,13 @@
 package model;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 public class Airport {
@@ -21,21 +24,10 @@ public class Airport {
         this.gates = new HashSet<>(Objects.requireNonNull(gates));
     }
 
-    public String getAirportId() {
-        return airportId;
-    }
-
-    public String getAirportName() {
-        return airportName;
-    }
-
-    public List<String> getTerminals() {
-        return Collections.unmodifiableList(terminals);
-    }
-
-    public Set<String> getGate() {
-        return Collections.unmodifiableSet(gates);
-    }
+    public String getAirportId() { return airportId; }
+    public String getAirportName() { return airportName; }
+    public List<String> getTerminals() { return Collections.unmodifiableList(terminals); }
+    public Set<String> getGates() { return Collections.unmodifiableSet(gates); }
 
     // ====== Core operations ======
 
@@ -58,14 +50,52 @@ public class Airport {
 
         for (Flight f : scheduledFlights) {
             if (gate.equals(f.getGate()) && sameMinute(dep, f.getDepartureUTC())) {
-                throw new IllegalStateException("Gate " + gate + " is already used at " + dep + " by flight " + f.getId());
+                throw new IllegalStateException("Gate " + gate + " is already used at " + dep + " by flight " + f.getFlightNumber());
             }
         }
         flight.setGate(gate);
     }
 
+    /**
+     * Release a gate by clearing the gate of flights whose departure is strictly before 'time'.
+     * (Very naive cleanup: once departure time has passed, free the gate.)
+     */
     public void releaseGate(String gate, LocalDateTime time) {
-        
+        for (Flight f : scheduledFlights) {
+            if (gate.equals(f.getGate()) && f.getDepartureUTC().isBefore(time)) {
+                f.setGate(null);
+            }
+        }
+    }
+
+    /** Return flights that DEPART from this airport on the specified date, sorted by departure time. */
+    public List<Flight> flightsDepartingOn(LocalDate date) {
+        List<Flight> result = new ArrayList<>();
+        for (Flight f : scheduledFlights) {
+            if (airportId.equals(f.getOrigin()) && f.getDepartureUTC().toLocalDate().equals(date)) {
+                result.add(f);
+            }
+        }
+        result.sort(Comparator.comparing(Flight::getDepartureUTC));
+        return result;
+    }
+
+    /**
+     * Find the first available gate at the given minute.
+     * A gate is available if no scheduled flight uses it at that exact minute.
+     */
+    public Optional<String> findAvailableGate(LocalDateTime minute) {
+        for (String gate : gates) {
+            boolean busy = false;
+            for (Flight f : scheduledFlights) {
+                if (gate.equals(f.getGate()) && sameMinute(minute, f.getDepartureUTC())) {
+                    busy = true;
+                    break;
+                }
+            }
+            if (!busy) return Optional.of(gate);
+        }
+        return Optional.empty();
     }
 
     // ---- Helpers ----
@@ -77,5 +107,18 @@ public class Airport {
                a.getDayOfMonth() == b.getDayOfMonth() &&
                a.getHour() == b.getHour() &&
                a.getMinute() == b.getMinute();
+    }
+
+    @Override public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Airport)) return false;
+        Airport other = (Airport) o;
+        return Objects.equals(airportId, other.airportId);
+    }
+
+    @Override public int hashCode() { return Objects.hash(airportId); }
+
+    @Override public String toString() {
+        return "Airport{" + airportId + ", " + airportName + "}";
     }
 }
