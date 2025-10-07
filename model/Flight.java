@@ -126,9 +126,19 @@ public class Flight implements Notifiable{
         arrivalUTC = arrivalUTC.plusMinutes(minutes);
     }
 
-    // Possible TODO: Account for Notifiable using notify
+    // Reassign gate and notify 
     public void changeGate(String newGate){
+        String oldGate = this.gate;
         this.gate = Objects.requireNonNull(newGate);
+
+        // Trigger notification
+        if (oldGate == null) {
+            notify("Gate assigned to " + newGate);
+        } else if (!oldGate.equals(newGate)) {
+            notifyWithPrefix("Gate Change", "from " + oldGate + " to " + newGate);
+        } else {
+            notify("Gate remains the same (" + newGate + ")");
+        }
     }
 
     // UTILITY: Require method for validation throughout this class
