@@ -20,3 +20,5 @@ public class Plane {
         return capacity;
     }
 }
+
+// add capacity of different seat classes, ie first class, economy?
