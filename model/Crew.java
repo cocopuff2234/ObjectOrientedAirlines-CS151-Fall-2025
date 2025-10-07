@@ -21,7 +21,7 @@ public abstract class Crew {
     }
 
     public String getEmployeeID() {
-        return employeeID;
+        return employeeId;
     }
 
     public String getFullName() {
