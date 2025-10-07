@@ -42,13 +42,26 @@ public class Flight {
     public LocalDateTime getArrivalUTC() { return arrivalUTC; }
     public String getGate() { return gate; }
     public void setGate(String gate) { this.gate = gate; }
-    public PlaneType getPlaneType() {return planeType;}
-    public Pilot getCaptain() {return captain;}
-    public void setCaptain(Pilot captain) {this.captain = captain;}
-    public Pilot getFirstOfficer() {return firstOfficer;}
-    public void setFirstOfficer(Pilot firstOfficer) {this.firstOfficer = firstOfficer;}
-    public List<FlightAttendant> getAttendants() {return Collections.unmodifiableList(attendants);}
-    public int getMinAttendants() {return minAttendants;}
+    public PlaneType getPlaneType() { return planeType ;}
+    public Pilot getCaptain() { return captain;}
+    public void setCaptain(Pilot captain) { this.captain = captain; }
+    public Pilot getFirstOfficer() { return firstOfficer; }
+    public void setFirstOfficer(Pilot firstOfficer) { this.firstOfficer = firstOfficer;}
+    public List<FlightAttendant> getAttendants() { return Collections.unmodifiableList(attendants); }
+    public int getMinAttendants() { return minAttendants; }
+
+    // -------- Crew assignment methods -------- 
+
+
+
+
+
+
+
+
+
+
+    // VITAL: Require method for validation
     
 
 

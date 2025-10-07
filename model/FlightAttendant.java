@@ -58,7 +58,7 @@ public class FlightAttendant extends Crew {
     public String toString() {
         return "FlightAttendant {" + 
                 "name:' " + getFullName() + '\'' +
-                ", id: '" + getEmployeeID() +  '\'' +
+                ", id: '" + getEmployeeId() +  '\'' +
                 ", position: '" + getPosition() + '\'' +
                 ", qualifications: '" + getCabinQualifications() + '\'' +
                 ", status: '" + getStatus() + '\''+
