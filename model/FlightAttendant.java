@@ -33,42 +33,26 @@ public class FlightAttendant extends Crew {
         super(employeeID, fullName, hiredOn, baseAirport);
         this.position = Objects.requireNonNull(position);
 
-        if (qualifcations != null) {
-            cabinQualifications.addAll(qualifcations);
-        }
+        if (qualifcations != null) {cabinQualifications.addAll(qualifcations);}
     }
 
 
 
     // ---------------- Getters / Setters ----------------
-    public FAPosition getPosition() {
-        return position;
-    }
-
-    public void setPosition(FAPosition position) {
-        this.position = Objects.requireNonNull(position);
-    }
-
-    public Set<PlaneType> getCabinQualifications() {
-        return Collections.unmodifiableSet(cabinQualifications);
-    }
+    public FAPosition getPosition() { return position;}
+    public void setPosition(FAPosition position) {this.position = Objects.requireNonNull(position);}
+    public Set<PlaneType> getCabinQualifications() {return Collections.unmodifiableSet(cabinQualifications);}
 
     // If cabin crew has completed training for plane type
-    public void addCabinQualification(PlaneType type){
-        cabinQualifications.add(type);
-    }
+    public void addCabinQualification(PlaneType type){cabinQualifications.add(type);}
 
     // ---------------- Abstract Overrides from Crew ----------------
 
     @Override
-    public Role getRole() {
-        return Role.FLIGHT_ATTENDANT;
-    }
+    public Role getRole() {return Role.FLIGHT_ATTENDANT;}
 
     @Override
-    public boolean canOperate(PlaneType type) {
-        return getStatus() == CrewStatus.AVAILABLE && cabinQualifications.contains(type);
-    }
+    public boolean canOperate(PlaneType type) {return getStatus() == CrewStatus.AVAILABLE && cabinQualifications.contains(type);}
 
     @Override
     public String toString() {
