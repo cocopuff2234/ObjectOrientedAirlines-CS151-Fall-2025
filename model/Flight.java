@@ -1,6 +1,7 @@
 package model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,7 +47,7 @@ public class Flight {
     public void setCaptain(Pilot captain) {this.captain = captain;}
     public Pilot getFirstOfficer() {return firstOfficer;}
     public void setFirstOfficer(Pilot firstOfficer) {this.firstOfficer = firstOfficer;}
-    public List<FlightAttendant> getAttendants() {return attendants;}
+    public List<FlightAttendant> getAttendants() {return Collections.unmodifiableList(attendants);}
     public int getMinAttendants() {return minAttendants;}
     
 
