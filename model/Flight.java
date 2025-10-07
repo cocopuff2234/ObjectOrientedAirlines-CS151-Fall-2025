@@ -121,7 +121,7 @@ public class Flight implements Notifiable{
 
     // Delay a flight by n (> 0) minutes
     public void delayByMinutes(long minutes){
-        require(minutes > 0, "Minutes must not be negative (< 0)");
+        require(minutes > 0, "Minutes must be at least 1 minute!");
 
         // Store old values for context
         LocalDateTime oldDeparture = departureUTC;
@@ -175,7 +175,7 @@ public class Flight implements Notifiable{
                 departureUTC, arrivalUTC, gate,
                 captain != null ? captain.getFullName() : "—",
                 firstOfficer != null ? firstOfficer.getFullName() : "—",
-                attendants.size(),  isCrewComplete()
+                attendants.size(),  hasRequiredCrew()
             );
     }
     @Override
