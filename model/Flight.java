@@ -122,8 +122,25 @@ public class Flight implements Notifiable{
     // Delay a flight by n (> 0) minutes
     public void delayByMinutes(long minutes){
         require(minutes >= 0, "Minutes must not be negative (< 0)");
+
+        // Store old values for context
+        LocalDateTime oldDeparture = departureUTC;
+        LocalDateTime oldArrival = arrivalUTC;
+
         departureUTC = departureUTC.plusMinutes(minutes);
         arrivalUTC = arrivalUTC.plusMinutes(minutes);
+
+            // Notify the change
+        notifyWithPrefix("Delay", String.format(
+            "Flight %s delayed by %d minute%s (Departure: %s → %s, Arrival: %s → %s)",
+            flightNumber,
+            minutes,
+            (minutes == 1 ? "" : "s"),
+            oldDeparture,
+            departureUTC,
+            oldArrival,
+            arrivalUTC
+        ));
     }
 
     // Reassign gate and notify 
