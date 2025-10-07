@@ -80,7 +80,7 @@ public class Pilot extends Crew {
     public String toString() {
         return "Pilot {" + 
                 "name:' " + getFullName() + '\'' +
-                ", id: '" + getEmployeeID() +  '\'' +
+                ", id: '" + getEmployeeId() +  '\'' +
                 ", rank: '" + getRank() + '\'' +
                 ", ratings: '" + getTypeRatings() + '\'' +
                 ", hours: '" + getTotalFlightHours() + '\''+
