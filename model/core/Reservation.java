@@ -28,11 +28,35 @@ public abstract class Reservation {
     private final Instant createdAt;
     private ReservationStatus status;
 
-    /** Convenience constructor: defaults to now + PENDING. */
+    /**
+     * Convenience constructor.
+     * <p>
+     * Initializes this reservation with the given {@code reservationId},
+     * sets {@link #createdAt} to {@link Instant#now()}, and the initial
+     * {@link #status} to {@link ReservationStatus#PENDING}.
+     * This overload is useful when callers do not need to control timestamps
+     * or the initial status.
+     * </p>
+     *
+     * @param reservationId stable unique identifier for the reservation
+     * @throws NullPointerException if {@code reservationId} is {@code null}
+     */
     protected Reservation(String reservationId) {
         this(reservationId, Instant.now(), ReservationStatus.PENDING);
     }
 
+    /**
+     * Primary constructor with explicit timestamp and initial status.
+     * <p>
+     * Use this overload when you need deterministic timestamps (e.g., in tests)
+     * or a non-default initial status. All arguments must be non-null.
+     * </p>
+     *
+     * @param reservationId stable unique identifier for the reservation
+     * @param createdAt     creation timestamp (UTC instant)
+     * @param status        initial reservation status
+     * @throws NullPointerException if any argument is {@code null}
+     */
     public Reservation(String reservationId, Instant createdAt, ReservationStatus status) {
         this.reservationId = Objects.requireNonNull(reservationId, "reservationId");
         this.createdAt = Objects.requireNonNull(createdAt, "createdAt");
@@ -64,7 +88,12 @@ public abstract class Reservation {
      */
     public abstract void cancel(Instant cancelTime);
 
-    /** Default: no penalty. Subclasses may override. */
+    /**
+     * Default penalty calculation: no penalty.
+     * Subclasses may override to implement fare rules (e.g., time-based fees).
+     *
+     * @return penalty amount (non-negative)
+     */
     public double computePenalty(Instant cancelTime) {
         return 0.0;
     }
