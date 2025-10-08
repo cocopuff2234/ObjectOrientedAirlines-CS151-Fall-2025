@@ -87,7 +87,7 @@ public abstract class Reservation {
     }
 
     @Override public String toString() {
-        return "Reservation{id=" + reservationId + ", status=" + status + ", createdAt=" + createdAt + "}";
+        return getClass().getSimpleName() + "{id=" + reservationId + ", status=" + status + ", createdAt=" + createdAt + "}";
     }
 
     /** Equality by stable id is usually enough. */
