@@ -1,6 +1,8 @@
 package model;
 
 import model.enums.PlaneType;
+import java.util.Set;
+import java.time.LocalDateTime;
 
 public class Plane {
     private final String planeId;
@@ -16,4 +18,16 @@ public class Plane {
     public String getPlaneId() { return planeId; }
     public PlaneType getPlaneType() { return planeType; }
     public int getCapacity() { return capacity; }
+
+    public Set<String> seatCodes() {
+        return;
+    }
+
+    public boolean isAvailableAt(LocalDateTime time) {
+        return false;
+    }
+
+    public boolean supportsRoute(int nmDistance) {
+        return false;
+    }
 }
