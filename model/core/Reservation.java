@@ -77,14 +77,14 @@ public abstract class Reservation {
     }
 
     /** Equality by stable id is usually enough. */
-    @Override public boolean equals(Object o) {
+    @Override public final boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Reservation)) return false;
         Reservation other = (Reservation) o;
         return reservationId.equals(other.reservationId);
     }
 
-    @Override public int hashCode() {
+    @Override public final int hashCode() {
         return reservationId.hashCode();
     }
 }
