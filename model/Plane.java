@@ -84,9 +84,13 @@ public class Plane {
 
     private String defaultSeatLetters() {
         try {
-            String letters = planeType.getDefaultSeatLetters();
-            if (letters != null && !letters.isBlank()) return letters;
-        } catch (NoSuchMethodError ignored) { }
+            java.lang.reflect.Method method = planeType.getClass().getMethod("getDefaultSeatLetters");
+            Object result = method.invoke(planeType);
+            if (result instanceof String) {
+                String letters = (String) result;
+                if (letters != null && !letters.isBlank()) return letters;
+            }
+        } catch (NoSuchMethodException | IllegalAccessException | java.lang.reflect.InvocationTargetException ignored) { }
         // Fallback: common 6-across narrow-body layout (skip 'I')
         return "ABCDEF";
     }
