@@ -64,42 +64,18 @@ public class Plane {
         return codes;
     }
 
-    /**
-     * Delegates to PlaneType range capability if available; otherwise falls back to a simple heuristic.
-     * @param nmDistance route distance in nautical miles
-     */
-    public boolean supportsRoute(int nmDistance) {
-        try {
-            // Preferred: delegate to enum capability
-            return planeType.supportsRouteNm(nmDistance);
-        } catch (NoSuchMethodError | UnsupportedOperationException e) {
-            // Fallback (very rough): narrow-body ~ 3500nm, wide-body ~ 7500nm
-            boolean wide = planeType.isWidebody(); // if you don't have this, assume false
-            int max = wide ? 7500 : 3500;
-            return nmDistance <= max;
-        }
-    }
-
      // ---------- Helpers ----------
 
     private String defaultSeatLetters() {
-        try {
-            java.lang.reflect.Method method = planeType.getClass().getMethod("getDefaultSeatLetters");
-            Object result = method.invoke(planeType);
-            if (result instanceof String) {
-                String letters = (String) result;
-                if (letters != null && !letters.isBlank()) return letters;
-            }
-        } catch (NoSuchMethodException | IllegalAccessException | java.lang.reflect.InvocationTargetException ignored) { }
+        String letters = planeType.getDefaultSeatLetters();
+        if (letters != null && !letters.isBlank()) return letters;
         // Fallback: common 6-across narrow-body layout (skip 'I')
         return "ABCDEF";
     }
 
     private int defaultSeatsPerRow(String letters) {
-        try {
-            int across = planeType.getDefaultSeatsPerRow();
-            if (across > 0) return across;
-        } catch (NoSuchMethodError ignored) { }
+        int across = planeType.getDefaultSeatsPerRow();
+        if (across > 0) return across;
         return Math.max(1, letters.length());
     }
 
