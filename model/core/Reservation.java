@@ -7,6 +7,20 @@ import model.enums.ReservationStatus;
 
 /**
  * Base abstraction for any reservable entity (e.g., Ticket).
+ * <p>
+ * <b>Invariants and Lifecycle:</b>
+ * <ul>
+ *   <li><b>reservationId</b> is globally unique and immutable for the lifetime of the reservation.</li>
+ *   <li><b>Status transitions</b> are strictly controlled:
+ *     <ul>
+ *       <li>PENDING → CONFIRMED → CANCELED</li>
+ *       <li>PENDING → CANCELED</li>
+ *     </ul>
+ *     No other transitions are allowed.</li>
+ *   <li><b>Equality</b> is defined by reservationId across all subclasses.</li>
+ *   <li>Subclasses must implement cancellation logic and may override penalty computation.</li>
+ *   <li>Persistence and consumers should rely on reservationId as the stable identifier.</li>
+ * </ul>
  * Provides id/status/creation time and guarded state transitions.
  */
 public abstract class Reservation {
