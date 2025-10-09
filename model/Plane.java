@@ -88,3 +88,5 @@ public class Plane {
         return Objects.equals(planeId, other.planeId);
     }
 }
+
+// add capacity of different seat classes, ie first class, economy?
