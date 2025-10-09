@@ -27,7 +27,7 @@ public class Ticket{
     }
 
     public Customer getCustomer(){
-        return Customer;
+        return customer;
     }
 
     public String getseatType() {return seatType; }
