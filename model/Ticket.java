@@ -16,10 +16,6 @@ public class Ticket{
         this.seatType = seatType;
     }
 
-    public String getSeat(){
-        return seat;
-    }
-
     public Flight getFlight(){
         return flight;
     }
@@ -28,33 +24,35 @@ public class Ticket{
         return customer;
     }
 
-    public String getseatType() {return seatType; }
+    public String getSeatType() {
+        return seatType;
+    }
 
     public void purchase(){
         // is crew available?
         // add this method to crew
-        if(!Flight.getCrew().isAvailable()){
+        if(!flight.getCrew().isAvailable()){
             System.out.println("There is not a crew to operate this flight. Please exit and try again later.");
             return;
         }
         // is plane operable
         // add this method to PLANE
-        if(!Flight.getPlane().isOperable()){
+        if(!flight.getPlane().isOperable()){
             System.out.println("Plane is not operable to fly. Please exit and try again later.");
             return;
         }
         // seat available?
-        if(Flight.getCapacity() <= 0){
+        if(flight.getCapacity() <= 0){
             System.out.println("There are no seats left on the plane. Please exit and try again later.");
             return;
         }
 
         // decrement plane capacity
         // add this method to PLANE
-        Flight.getPlane().decrementCapacity();
+        flight.getPlane().decrementCapacity();
 
         // customer books the ticket.
-        Customer.bookTicket(this);
+        customer.bookTicket(this);
 
         // update state
         status = "Booked";
@@ -71,9 +69,9 @@ public class Ticket{
         // change from booked to cancelled
         status = "Cancelled";
         // remove the ticket from the customer's list of tickets
-        Customer.cancelTicket(this);
+        customer.cancelTicket(this);
         // increment number of seats on the plane
-        Flight.getPlane().incrementCapacity();
+        flight.getPlane().incrementCapacity();
     }
 
     public void upgradeTicket(String newSeatType, double newPrice) {
