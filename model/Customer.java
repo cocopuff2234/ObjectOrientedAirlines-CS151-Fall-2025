@@ -19,7 +19,7 @@ public class Customer{
         this.balance = 0;
     }
 
-    public void bookTicket(Flight flight, Seat seat, double price){
+    public void bookTicket(Flight flight, double price){
         // is flight operable
             // is seat available
                 ticketList.add(ticket);

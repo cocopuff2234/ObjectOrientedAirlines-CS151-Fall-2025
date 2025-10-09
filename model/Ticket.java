@@ -15,7 +15,7 @@ public class Ticket{
         this.customer = customer;
         this.price = price;
         this.status = "Booked";
-        this.seatType =
+        this.seatType = "Economy"
     }
 
     public String getSeat(){
