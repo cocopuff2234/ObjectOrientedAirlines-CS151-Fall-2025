@@ -25,6 +25,10 @@ public class Flight implements Notifiable{
     private final List<FlightAttendant> attendants = new ArrayList<>();
     private final int minAttendants;
 
+    // --- instance limit control ---
+    private static final int MAXIMUM_INSTANCES = 100;
+    private static int instanceCount = 0;
+
     /**
      * Constructs a new Flight object that represents a scheduled airline flight.
      *
