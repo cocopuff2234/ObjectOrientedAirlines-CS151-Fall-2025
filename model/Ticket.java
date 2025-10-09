@@ -2,20 +2,18 @@ package model;
 public class Ticket{
     private int ticketId;
     private double price;
-    private String seat;
     private Flight flight;
     private Customer customer;
-    // cancelled ticket, in-use, booked etc. enumerated variable fs
+    // cancelled ticket, in-use, booked etc.
     private String status;
     private String seatType;
 
-    public Ticket(Seat seat, Flight flight, Customer customer, double price){
-        this.seat = seat;
+    public Ticket(String seatType, Flight flight, Customer customer, double price){
         this.flight = flight;
         this.customer = customer;
         this.price = price;
         this.status = "Booked";
-        this.seatType = "Economy"
+        this.seatType = seatType;
     }
 
     public String getSeat(){
@@ -37,15 +35,18 @@ public class Ticket{
         // add this method to crew
         if(!Flight.getCrew().isAvailable()){
             System.out.println("There is not a crew to operate this flight. Please exit and try again later.");
+            return;
         }
         // is plane operable
         // add this method to PLANE
         if(!Flight.getPlane().isOperable()){
             System.out.println("Plane is not operable to fly. Please exit and try again later.");
+            return;
         }
         // seat available?
-        if(Flight.getCapacity() < 0){
+        if(Flight.getCapacity() <= 0){
             System.out.println("There are no seats left on the plane. Please exit and try again later.");
+            return;
         }
 
         // decrement plane capacity
@@ -75,12 +76,20 @@ public class Ticket{
         Flight.getPlane().incrementCapacity();
     }
 
-    public void upgradeTicket(){
-        // more specific capacities is what we need
-        if(Flight.getPlane.getCapacity > 0){
-            // blah blah blah something with prices
-            // maybe need to define old & new prices, and standard rates for certain flights
+    public void upgradeTicket(String newSeatType, double newPrice) {
+        if (flight.getPlane().getCapacity() <= 0) {
+            System.out.println("No seats available for upgrade.");
+            return;
         }
 
+        // adjust customer balance if upgrading costs more
+        if (newPrice > price) {
+            customer.setBalance(customer.getBalance() + (newPrice - price));
+        }
+
+        seatType = newSeatType;
+        price = newPrice;
+
+        System.out.println("Ticket upgraded to " + seatType + " for flight " + flight.getFlightNumber());
     }
 }

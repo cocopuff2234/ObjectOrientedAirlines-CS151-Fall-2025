@@ -11,7 +11,7 @@ public class Customer{
     private List<Ticket> ticketList;
     private double balance;
 
-    // constructor
+    // constructors
     public Customer(String name, String phoneNumber, String email){
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -36,6 +36,8 @@ public class Customer{
     public void setBalance(double balance) { this.balance = balance; }
 
     public void bookTicket(Flight flight, double price){
+        // first check if the flight's plane is operable and there are seats
+        // on the plane
         if (flight.getPlane().isOperable() && flight.getPlane().getCapacity() > 0) {
             Ticket ticket = new Ticket("Economy", flight, this, price);
             ticketList.add(ticket);
@@ -43,21 +45,29 @@ public class Customer{
             flight.getPlane().decrementCapacity();
             System.out.println("Ticket booked successfully for flight " + flight.getFlightNumber());
         }
+        // if the conditions are not satisfied alert the flyer
         else {
             System.out.println("This flight is not available or has no seats left.");
         }
     }
 
     public void cancelTicket(Ticket ticket){
+        // remove the ticket from the list of tickets
+        // remove the price of the ticket from the flyer's balance
         ticketList.remove(ticket);
         balance -= ticket.getPrice();
         System.out.println("Ticket cancelled.");
     }
 
     public void seeTickets() {
+        // if the ticket list is empty, alert the flyer there are no
+        // tickets in their name
         if (ticketList.isEmpty()) {
             System.out.println("No tickets found for " + name);
-        } else {
+        }
+        // print the tickets the flyer has under their name,
+        // including flight number, seat type, price, and status
+        else {
             System.out.println("Tickets for " + name + ":");
             for (Ticket ticket : ticketList) {
                 System.out.println("- Flight: " + ticket.getFlight().getFlightNumber() +
