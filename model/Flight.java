@@ -53,6 +53,14 @@ public class Flight implements Notifiable{
     */
     public Flight(String flightNumber, String airline, String origin, String destination, LocalDateTime departureUTC,
             LocalDateTime arrivalUTC, PlaneType planeType, int minAttendants) {
+
+        // Check if we have 100 flights already
+        if (instanceCount >= MAXIMUM_INSTANCES) {
+            throw new IllegalStateException(
+                "Cannot create more than " + MAXIMUM_INSTANCES + " Flight instances.");
+        }
+        instanceCount++;
+        
         this.flightNumber = Objects.requireNonNull(flightNumber);
         this.airline = Objects.requireNonNull(airline);
         this.origin = Objects.requireNonNull(origin);
