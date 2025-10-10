@@ -87,14 +87,14 @@ Every flight needs their flight attendants to ensure customer has a comfortable 
   
 ## Installation
 1. **Clone the repository**  
-   git clone https://github.com/cocopuff2234/ObjectOrientedAirlines-CS151-Fall-2025.git
-   cd ObjectOrientedAirlines-CS151-Fall-2025
+   - git clone https://github.com/cocopuff2234/ObjectOrientedAirlines-CS151-Fall-2025.git
+   - cd ObjectOrientedAirlines-CS151-Fall-2025
    
 2. **Compile, or at this step alternatively open with IDE of choice and run Main**
-  javac -d out src/Main.java src/model/*.java src/model/enums/*.java
+  - javac -d out src/Main.java src/model/*.java src/model/enums/*.java
 
 3. **Run the program**
-  java -cp out Main
+  - java -cp out Main
   
 # Usage
 The Object-Oriented Airlines Client has a text-based UI that flyers interact with.  
