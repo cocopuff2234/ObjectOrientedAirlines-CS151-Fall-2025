@@ -46,6 +46,12 @@ public class Plane {
         if (availableSeats < capacity) availableSeats++;
     }
 
+    // for Customer class check
+    public boolean isOperable() {
+        // simplified: always true since maintenance model beyond scope
+        return true;
+    }
+
     /**
      * Generate seat codes like A1..F1, A2..F2, ... until capacity is reached.
      * Uses PlaneType's default seat letters (e.g., "ABCDEF" or "ABCDEFHJK") and seats-per-row hint.
