@@ -113,7 +113,7 @@ public class AirportUI {
             double price = priceForClass(seatClass);
 
             // Final availability check
-            Ticket ticket = new Ticket(seatClass, flight, customer, price);
+            Ticket ticket = new Ticket(seatClass, flight, customer);
             try {
                 // throw if full
                 flight.addTicket(ticket);
