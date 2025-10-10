@@ -66,8 +66,25 @@ Flights want a qualified pilot who is certified for certain aircraft.
 - totalFlightHours - the total flight hours the pilot has accumulated
 
 ### Methods
+- canOperate - Check if pilot is qualified to fly plane
 - addTypeRating - add aircraft rating if pilot receives training/certification
 - addFlightHours - add flight hours after successful flight
+
+## Flight Attendant - Sajid
+Every flight needs their flight attendants to ensure customer has a comfortable experience.
+
+### Attributes:
+- employeeId — the unique ID for this crew member
+- fullName — the full name of the flight attendant
+- hiredOn — the hire date
+- baseAirport — the home base airport code
+- position — the flight attendant's position (Lead/Junior)
+- quals — the aircraft types this attendant is qualified for
+
+## Methods 
+- canOperate - check if flight attendant is trained for aircraft
+- addCabinQualification - if flight attendant has completed training for another plane type
+  
   
 # Installation Instructions
 
