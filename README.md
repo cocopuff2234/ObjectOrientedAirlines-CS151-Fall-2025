@@ -37,6 +37,38 @@ The Ticket class is defined in our client by 6 different attributes and 3 differ
 - status - status of the ticket
 - seatType - seat type the ticket reserves
 
+### Methods
+
+
+## Crew - Sajid
+We need a qualified crew assigned to our flights to ensure a smooth operation so our customer lands at their destination safely.
+Crew is an abstract class that contains shared attributes between our pilots and flight attendants, like their employee IDs and airport base.
+
+### Attributes:
+- employeeId - the unique ID for crew
+- fullName - the crew's full name
+- hiredOn - the date the crew was hired
+- baseAirport - the airport this crew is based at
+
+### Methods
+- canOperate: check whether crew has necessary qualifications to operate flight
+
+## Pilot - Sajid
+Flights want a qualified pilot who is certified for certain aircraft.
+
+### Attributes:
+- employeeId - the unique ID for pilot
+- fullName - the pilot's full name
+- hiredOn - the date the pilot was hired
+- baseAirport - the airport this pilot is based at
+- rank - the pilot's current rank (CAPTAIN or FIRST_OFFICER)
+- ratings - a collection of aircraft types the pilot is certified to operate
+- totalFlightHours - the total flight hours the pilot has accumulated
+
+### Methods
+- addTypeRating - add aircraft rating if pilot receives training/certification
+- addFlightHours - add flight hours after successful flight
+  
 # Installation Instructions
 
 # Usage
