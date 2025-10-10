@@ -20,7 +20,7 @@ public class Ticket{
         this.flight = flight;
         this.customer = customer;
         this.price = flight.getPlane().getPrice(seatType);;
-        this.status = ReservationStatus.PENDING;
+        this.status = ReservationStatus.CONFIRMED;
         this.seatType = seatType;
     }
 
