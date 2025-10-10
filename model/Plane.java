@@ -32,9 +32,14 @@ public class Plane {
         this.planeId = planeId;
         this.planeType = planeType;
         this.capacity = capacity;
-        this.availableSeats = Math.max(0, capacity);
         this.firstClassPrice = firstClassPrice;
         this.economyPrice = economyPrice;
+        this.availableSeats = Math.max(0, capacity);
+        // Split the seats: 20% first class, 80% economy
+        this.firstClassSeats = (int)Math.round(capacity * 0.2);
+        this.economySeats = capacity - this.firstClassSeats;
+        this.availableFirstClassSeats = this.firstClassSeats;
+        this.availableEconomySeats = this.economySeats;
     }
 
     public String getPlaneId() { return planeId; }
@@ -49,7 +54,7 @@ public class Plane {
     public double getEconomyPrice() { return economyPrice; }
 
 
-    // Reserve one seat if available. Returns true if success, false if full. 
+    // Reserve one seat if available. Returns true if success, false if full.
     public boolean decrementCapacity() {
         if (availableSeats <= 0) return false;
         availableSeats--;
@@ -161,3 +166,16 @@ public class Plane {
 }
 
 // add capacity of different seat classes, ie first class, economy?
+    /**
+     * Returns the price for the given seat type ("first" or "economy").
+     * @param seatType "first" or "economy"
+     * @return price for the seat type, or 0.0 if seatType is invalid
+     */
+    public double getPrice(String seatType) {
+        if ("first".equalsIgnoreCase(seatType)) {
+            return firstClassPrice;
+        } else if ("economy".equalsIgnoreCase(seatType)) {
+            return economyPrice;
+        }
+        return 0.0;
+    }

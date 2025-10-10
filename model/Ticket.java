@@ -1,9 +1,9 @@
 package model;
-
 import model.enums.ReservationStatus;
 
 public class Ticket{
     private int ticketId; 
+    private static int nextTicketId = 1;
     private double price;
     private Flight flight;
     private Customer customer;
@@ -11,13 +11,16 @@ public class Ticket{
     private ReservationStatus status;
     private String seatType;
 
+    private int generateTicketId() {
+        return nextTicketId++;
+    }
 
-
-    public Ticket(String seatType, Flight flight, Customer customer, double price){
+    public Ticket(String seatType, Flight flight, Customer customer){
+        this.ticketId = generateTicketId();
         this.flight = flight;
         this.customer = customer;
-        this.price = price;
-        this.status = ReservationStatus.PENDING;
+        this.price = flight.getPlane().getPrice(seatType);
+        this.status = ReservationStatus.CONFIRMED;
         this.seatType = seatType;
     }
 
@@ -81,22 +84,27 @@ public class Ticket{
         // remove the ticket from the customer's list of tickets
         customer.cancelTicket(this);
         // increment number of seats on the plane
-        flight.getPlane().incrementCapacity();
+        flight.getPlane().releaseSeat(seatType);
     }
 
     public void upgradeTicket(String newSeatType, double newPrice) {
-        if (flight.getPlane().getCapacity() <= 0) {
-            System.out.println("No seats available for upgrade.");
+        if (!flight.getPlane().reserveSeat(newSeatType)) {
+            System.out.println("No seats available for upgrade to " + newSeatType + ".");
             return;
         }
 
+        // Release the old seat
+        flight.getPlane().releaseSeat(seatType);
+
+        double updatedPrice = flight.getPlane().getPrice(newSeatType);
+
         // adjust customer balance if upgrading costs more
-        if (newPrice > price) {
-            customer.setBalance(customer.getBalance() + (newPrice - price));
+        if (updatedPrice > price) {
+            customer.setBalance(customer.getBalance() + (updatedPrice - price));
         }
 
         seatType = newSeatType;
-        price = newPrice;
+        price = updatedPrice;
 
         System.out.println("Ticket upgraded to " + seatType + " for flight " + flight.getFlightNumber());
     }
