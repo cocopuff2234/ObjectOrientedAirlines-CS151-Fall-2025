@@ -19,7 +19,7 @@ public class Flight implements Notifiable{
     private LocalDateTime departureUTC;
     private LocalDateTime arrivalUTC;
     private String gate;
-    private final PlaneType planeType;
+    private final Plane plane;
     private Pilot captain;
     private Pilot firstOfficer;
     private final List<FlightAttendant> attendants = new ArrayList<>();
@@ -53,7 +53,7 @@ public class Flight implements Notifiable{
      * @throws IllegalArgumentException if {@code arrivalUTC} is before {@code departureUTC}
     */
     public Flight(String flightNumber, String airline, String origin, String destination, LocalDateTime departureUTC,
-            LocalDateTime arrivalUTC, PlaneType planeType, int minAttendants) {
+            LocalDateTime arrivalUTC, Plane plane, int minAttendants) {
 
         // Check if we have 100 flights already
         if (instanceCount >= MAXIMUM_INSTANCES) {
@@ -68,7 +68,7 @@ public class Flight implements Notifiable{
         this.destination = Objects.requireNonNull(destination);
         this.departureUTC = Objects.requireNonNull(departureUTC);
         this.arrivalUTC = Objects.requireNonNull(arrivalUTC);
-        this.planeType = Objects.requireNonNull(planeType);
+        this.plane = Objects.requireNonNull(plane);
         this.minAttendants = Math.max(1, minAttendants);
         require(!arrivalUTC.isBefore(departureUTC), "Arrival time must be after Departure time!") ;
     }
@@ -80,7 +80,8 @@ public class Flight implements Notifiable{
     public LocalDateTime getArrivalUTC() { return arrivalUTC; }
     public String getGate() { return gate; }
     public void setGate(String gate) { this.gate = gate; }
-    public PlaneType getPlaneType() { return planeType ;}
+    public PlaneType getPlaneType() { return plane.getPlaneType() ;}
+    public Plane getPlane(){ return plane; }
     public Pilot getCaptain() { return captain;}
     public void setCaptain(Pilot captain) { this.captain = captain; }
     public Pilot getFirstOfficer() { return firstOfficer; }
@@ -94,7 +95,7 @@ public class Flight implements Notifiable{
         require(p != null, "Captain assignment must not be NULL");
         require(p.getStatus() == CrewStatus.AVAILABLE, "Captain must not be ON LEAVE or SUSPENDED");
         require(p.getRank() == PilotRank.CAPTAIN, "Captain must have rank CAPTAIN");
-        require(p.canOperate(planeType), "Captain lacks type rating for Aircraft: " + planeType);
+        require(p.canOperate(getPlaneType()), "Captain lacks type rating for Aircraft: " + getPlaneType());
         this.captain = p;
     }
 
@@ -102,14 +103,14 @@ public class Flight implements Notifiable{
         require(p != null, "First Officer assignment must not be NULL");
         require(p.getStatus() == CrewStatus.AVAILABLE, "First Officer must not be ON LEAVE or SUSPENDED");
         require(p.getRank() == PilotRank.FIRST_OFFICER, "First Officer must have rank FIRST OFFICER");
-        require(p.canOperate(planeType), "First Officer lacks type rating for Aircraft: " + planeType);
+        require(p.canOperate(getPlaneType()), "First Officer lacks type rating for Aircraft: " + getPlaneType());
         this.firstOfficer = p;
     }
 
     public void addAttendant(FlightAttendant fa){
         require(fa != null, "Flight attendant must not be NULL");
         require(fa.getStatus() == CrewStatus.AVAILABLE, "Flight Attendant must not be ON LEAVE or SUSPENDED");
-        require(fa.canOperate(planeType), "Flight attendant not qualified for Aircraft: " + planeType);
+        require(fa.canOperate(getPlaneType()), "Flight attendant not qualified for Aircraft: " + getPlaneType());
         require(!attendants.contains(fa), "attendant already assigned");
         attendants.add(fa);
     }
@@ -175,22 +176,21 @@ public class Flight implements Notifiable{
     // Add a ticket and decrement plane capacity
     public void addTicket(Ticket ticket) {
         require(ticket != null, "Ticket must not be null");
+        require(plane.decrementCapacity(), "Flight is full");
         tickets.add(ticket);
-        planeType.getPlane().decrementCapacity();
+        // planeType.getPlane().decrementCapacity();
     }
 
     // Remove a ticket and increment plane capacity
     public boolean removeTicket(Ticket ticket) {
         boolean removed = tickets.remove(ticket);
-        if (removed) {
-            planeType.getPlane().incrementCapacity();
-        }
+        if (removed) plane.incrementCapacity(); // use plane instance
         return removed;
     }
 
     // Get available seats
     public int getAvailableSeats() {
-        return planeType.getPlane().getCapacity();
+        return plane.getAvailableSeats();
     }
 
     // Check if seats available for a seat type
@@ -211,7 +211,7 @@ public class Flight implements Notifiable{
             Captain: %s | First Officer: %s | Flight Attendants: %d
             Crew Complete: %s
             """.formatted(
-                airline, flightNumber, origin, destination, planeType,
+                airline, flightNumber, origin, destination, plane,
                 departureUTC, arrivalUTC, gate,
                 captain != null ? captain.getFullName() : "—",
                 firstOfficer != null ? firstOfficer.getFullName() : "—",

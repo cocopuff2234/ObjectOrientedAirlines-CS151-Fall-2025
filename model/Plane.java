@@ -15,6 +15,7 @@ public class Plane {
     private final String planeId;
     private final PlaneType planeType;
     private final int capacity;
+    private int availableSeats;
 
     /**
      * @param planeId    stable identifier (e.g., "P001")
@@ -25,11 +26,31 @@ public class Plane {
         this.planeId = planeId;
         this.planeType = planeType;
         this.capacity = capacity;
+        this.availableSeats = Math.max(0, capacity);
     }
 
     public String getPlaneId() { return planeId; }
     public PlaneType getPlaneType() { return planeType; }
     public int getCapacity() { return capacity; }
+    public int getAvailableSeats() { return availableSeats; }
+
+
+    // Reserve one seat if available. Returns true if success, false if full. 
+    public boolean decrementCapacity() {
+        if (availableSeats <= 0) return false;
+        availableSeats--;
+        return true;
+    }
+
+    public void incrementCapacity(){
+        if (availableSeats < capacity) availableSeats++;
+    }
+
+    // for Customer class check
+    public boolean isOperable() {
+        // simplified: always true since maintenance model beyond scope
+        return true;
+    }
 
     /**
      * Generate seat codes like A1..F1, A2..F2, ... until capacity is reached.
