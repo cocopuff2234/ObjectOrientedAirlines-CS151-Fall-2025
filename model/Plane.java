@@ -20,8 +20,8 @@ public class Plane {
     private int economySeats;
     private int availableFirstClassSeats;
     private int availableEconomySeats;
-    private double firstClassPrice;
-    private double economyPrice;
+    private final double firstClassPrice;
+    private final double economyPrice;
 
     /**
      * @param planeId    stable identifier (e.g., "P001")
