@@ -19,7 +19,6 @@ public class Flight implements Notifiable{
     private LocalDateTime departureUTC;
     private LocalDateTime arrivalUTC;
     private String gate;
-    private final PlaneType planeType;
     private final Plane plane;
     private Pilot captain;
     private Pilot firstOfficer;
@@ -54,7 +53,7 @@ public class Flight implements Notifiable{
      * @throws IllegalArgumentException if {@code arrivalUTC} is before {@code departureUTC}
     */
     public Flight(String flightNumber, String airline, String origin, String destination, LocalDateTime departureUTC,
-            LocalDateTime arrivalUTC, PlaneType planeType, int minAttendants) {
+            LocalDateTime arrivalUTC, Plane plane, int minAttendants) {
 
         // Check if we have 100 flights already
         if (instanceCount >= MAXIMUM_INSTANCES) {
@@ -69,7 +68,7 @@ public class Flight implements Notifiable{
         this.destination = Objects.requireNonNull(destination);
         this.departureUTC = Objects.requireNonNull(departureUTC);
         this.arrivalUTC = Objects.requireNonNull(arrivalUTC);
-        this.planeType = Objects.requireNonNull(planeType);
+        this.plane = Objects.requireNonNull(plane);
         this.minAttendants = Math.max(1, minAttendants);
         require(!arrivalUTC.isBefore(departureUTC), "Arrival time must be after Departure time!") ;
     }

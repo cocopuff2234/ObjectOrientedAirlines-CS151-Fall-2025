@@ -15,6 +15,7 @@ public class Plane {
     private final String planeId;
     private final PlaneType planeType;
     private final int capacity;
+    private int availableSeats;
 
     /**
      * @param planeId    stable identifier (e.g., "P001")
@@ -25,11 +26,13 @@ public class Plane {
         this.planeId = planeId;
         this.planeType = planeType;
         this.capacity = capacity;
+        this.availableSeats = Math.max(0, capacity);
     }
 
     public String getPlaneId() { return planeId; }
     public PlaneType getPlaneType() { return planeType; }
     public int getCapacity() { return capacity; }
+    public int getAvailableSeats() { return availableSeats; }
 
     /**
      * Generate seat codes like A1..F1, A2..F2, ... until capacity is reached.
