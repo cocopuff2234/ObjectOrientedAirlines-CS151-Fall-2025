@@ -28,33 +28,43 @@ public class Ticket{
     public ReservationStatus getStatus() { return status;}
     public void setStatus(ReservationStatus status){ this.status = status; }
 
-    public void purchase(){
-        // is crew available?
+    public void purchase() {
+        // Check crew availability
         if(!flight.hasRequiredCrew()){
             System.out.println("There is not a crew to operate this flight. Please exit and try again later.");
             return;
         }
-        // is plane operable
+
+        // Check plane operability
         if(!flight.getPlane().isOperable()){
             System.out.println("Plane is not operable to fly. Please exit and try again later.");
             return;
         }
-        // seat available?
-        if(flight.getAvailableSeats() <= 0){
-            System.out.println("There are no seats left on the plane. Please exit and try again later.");
+
+        // Check overall seats
+        if(flight.getPlane().getAvailableSeats() <= 0){
+            System.out.println("No seats left on the plane. Please exit and try again later.");
             return;
         }
 
-        // reserve a seat FIRST and verify success (safer than checking count separately)
+        // Decrement overall capacity
         if (!flight.getPlane().decrementCapacity()) {
             System.out.println("Seat reservation failed (flight became full).");
             return;
         }
 
-        // customer books the ticket.
+        // Reserve the specific seat type (First/Economy)
+        if (!flight.getPlane().reserveSeat(seatType)) {
+            // Release the overall seat if specific type not available
+            flight.getPlane().incrementCapacity();
+            System.out.println("No " + seatType + " seats available on this flight.");
+            return;
+        }
+
+        // Customer books the ticket
         customer.bookTicket(this);
 
-        // update state
+        // Update status
         status = ReservationStatus.CONFIRMED;
 
         System.out.println("Ticket booked successfully!");
