@@ -34,6 +34,18 @@ public class Plane {
     public int getCapacity() { return capacity; }
     public int getAvailableSeats() { return availableSeats; }
 
+
+    // Reserve one seat if available. Returns true if success, false if full. 
+    public boolean decrementCapacity() {
+        if (availableSeats <= 0) return false;
+        availableSeats--;
+        return true;
+    }
+
+    public void incrementCapacity(){
+        if (availableSeats < capacity) availableSeats++;
+    }
+
     /**
      * Generate seat codes like A1..F1, A2..F2, ... until capacity is reached.
      * Uses PlaneType's default seat letters (e.g., "ABCDEF" or "ABCDEFHJK") and seats-per-row hint.

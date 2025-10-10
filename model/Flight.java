@@ -80,7 +80,7 @@ public class Flight implements Notifiable{
     public LocalDateTime getArrivalUTC() { return arrivalUTC; }
     public String getGate() { return gate; }
     public void setGate(String gate) { this.gate = gate; }
-    public PlaneType getPlaneType() { return planeType ;}
+    public PlaneType getPlaneType() { return plane.getPlaneType() ;}
     public Plane getPlane(){ return plane; }
     public Pilot getCaptain() { return captain;}
     public void setCaptain(Pilot captain) { this.captain = captain; }
@@ -95,7 +95,7 @@ public class Flight implements Notifiable{
         require(p != null, "Captain assignment must not be NULL");
         require(p.getStatus() == CrewStatus.AVAILABLE, "Captain must not be ON LEAVE or SUSPENDED");
         require(p.getRank() == PilotRank.CAPTAIN, "Captain must have rank CAPTAIN");
-        require(p.canOperate(planeType), "Captain lacks type rating for Aircraft: " + planeType);
+        require(p.canOperate(getPlaneType()), "Captain lacks type rating for Aircraft: " + getPlaneType());
         this.captain = p;
     }
 
@@ -103,14 +103,14 @@ public class Flight implements Notifiable{
         require(p != null, "First Officer assignment must not be NULL");
         require(p.getStatus() == CrewStatus.AVAILABLE, "First Officer must not be ON LEAVE or SUSPENDED");
         require(p.getRank() == PilotRank.FIRST_OFFICER, "First Officer must have rank FIRST OFFICER");
-        require(p.canOperate(planeType), "First Officer lacks type rating for Aircraft: " + planeType);
+        require(p.canOperate(getPlaneType()), "First Officer lacks type rating for Aircraft: " + getPlaneType());
         this.firstOfficer = p;
     }
 
     public void addAttendant(FlightAttendant fa){
         require(fa != null, "Flight attendant must not be NULL");
         require(fa.getStatus() == CrewStatus.AVAILABLE, "Flight Attendant must not be ON LEAVE or SUSPENDED");
-        require(fa.canOperate(planeType), "Flight attendant not qualified for Aircraft: " + planeType);
+        require(fa.canOperate(getPlaneType()), "Flight attendant not qualified for Aircraft: " + getPlaneType());
         require(!attendants.contains(fa), "attendant already assigned");
         attendants.add(fa);
     }
@@ -212,7 +212,7 @@ public class Flight implements Notifiable{
             Captain: %s | First Officer: %s | Flight Attendants: %d
             Crew Complete: %s
             """.formatted(
-                airline, flightNumber, origin, destination, planeType,
+                airline, flightNumber, origin, destination, plane,
                 departureUTC, arrivalUTC, gate,
                 captain != null ? captain.getFullName() : "—",
                 firstOfficer != null ? firstOfficer.getFullName() : "—",
