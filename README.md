@@ -89,96 +89,38 @@ Every flight needs their flight attendants to ensure customer has a comfortable 
 # Installation Instructions
 
 # Usage
-The Object-Oriented Airlines Client has a text-based UI that flyers interact with. The client first prompts the user with what operation they would like to perform. The operations include: 
+The Object-Oriented Airlines Client has a text-based UI that flyers interact with.  
+The client first prompts the user with what operation they would like to perform.  
+The available operations include:
 
-- 1. Book a Flight
-     User inputs travel details:
+- 1. Book a Flight  
+- 2. Cancel a Flight  
+- 3. Check Flight Status  
+- 4. See Available Flights  
+- 5. See Existing Reservations  
+- 6. Exit  
 
-Departure date (e.g., 2025-10-15)
+After selecting an option, the program follows these paths:
 
-Departure airport
+- **Book a Flight:**  
+  Search for flights by date, origin, and destination.  
+  If matches are found, select a flight, enter customer details, choose a seat class, and confirm the booking.
 
-Destination airport
+- **Cancel a Flight:**  
+  Identify yourself with your name, phone, and email.  
+  Choose a ticket from your reservations to cancel.
 
-System searches through all flights for matches:
+- **Check Flight Status:**  
+  Enter a flight number to view its route, departure and arrival times, seat availability, and current status.
 
-Origin matches input
+- **See Available Flights:**  
+  Displays all available flights with route details, departure times, and seats remaining.
 
-Destination matches input
+- **See Existing Reservations:**  
+  Look up reservations by providing your name, phone, and email to view booked flights and ticket details.
 
-Date matches departure date
-
-If no flights match: print message and return to menu.
-
-If matches found:
-
-Display each with number, departure/arrival times, seats available.
-
-Example:
-
-1) OA123 | Departs: 2025-10-15T10:00 | Arrives: 2025-10-15T13:00 | Seats left: 5
-
-
-User selects flight by entering a number (or 0 to cancel).
-
-System validates:
-
-Is plane operable?
-
-Has required crew?
-
-Are seats available?
-
-If any fail → print message and return.
-
-Customer Info Prompt:
-
-Name
-
-Phone
-
-Email
-
-The system checks if the customer already exists:
-
-If yes → reuse existing customer.
-
-If no → create new Customer object and store in list.
-
-Seat class selection:
-
-Economy / Business / First
-
-priceForClass() calculates:
-
-Economy → $150
-
-Business → $350
-
-First → $700
-
-Ticket creation:
-
-Ticket created with selected class, flight, and customer.
-
-flight.addTicket(ticket) adds to flight (throws exception if full).
-
-customer.getTicketList().add(ticket) stores ticket for that customer.
-
-Customer balance increases by ticket price.
-
-Ticket status set to CONFIRMED.
-
-Confirmation message displayed.
-
-Return Path: back to main menu.
-- 2. Cancel a Flight
-- 3. Check Flight Status
-- 4. See Available Flights
-- 5. See Existing Reservations
-- 6. Exit
- 
-
+- **Exit:**  
+  Closes the application.
 
 # Contributions
 Erik - Customer class, Ticket class, seat type methods and attributes in Plane class, debugging in main
