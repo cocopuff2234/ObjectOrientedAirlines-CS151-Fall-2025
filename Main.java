@@ -12,11 +12,11 @@ public class Main {
         List<Flight> flights = new ArrayList<>();
 
         // Planes
-        Plane p1 = new Plane("PL001", PlaneType.A320, PlaneType.A320.getTypicalSeats());
-        Plane p2 = new Plane("PL002", PlaneType.B737, PlaneType.B737.getTypicalSeats());
-        Plane p3 = new Plane("PL003", PlaneType.A320, PlaneType.A320.getTypicalSeats());
-        Plane p4 = new Plane("PL004", PlaneType.B737, PlaneType.B737.getTypicalSeats());
-        Plane p5 = new Plane("PL005", PlaneType.A320, PlaneType.A320.getTypicalSeats());
+        Plane p1 = new Plane("PL001", PlaneType.A320, PlaneType.A320.getTypicalSeats(), 200.0, 100.0);
+        Plane p2 = new Plane("PL002", PlaneType.B737, PlaneType.B737.getTypicalSeats(), 200.0, 100.0);
+        Plane p3 = new Plane("PL003", PlaneType.A320, PlaneType.A320.getTypicalSeats(), 200.0, 100.0);
+        Plane p4 = new Plane("PL004", PlaneType.B737, PlaneType.B737.getTypicalSeats(), 200.0, 100.0);
+        Plane p5 = new Plane("PL005", PlaneType.A320, PlaneType.A320.getTypicalSeats(), 200.0, 100.0);
 
         // Flights
         flights.add(new Flight("AA001", "American Airlines", "New York", "Los Angeles",

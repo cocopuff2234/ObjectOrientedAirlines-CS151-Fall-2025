@@ -163,9 +163,7 @@ public class Plane {
             }
         }
     }
-}
 
-// add capacity of different seat classes, ie first class, economy?
     /**
      * Returns the price for the given seat type ("first" or "economy").
      * @param seatType "first" or "economy"
@@ -179,3 +177,4 @@ public class Plane {
         }
         return 0.0;
     }
+}
