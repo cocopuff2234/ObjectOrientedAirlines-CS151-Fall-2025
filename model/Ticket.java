@@ -25,6 +25,8 @@ public class Ticket{
     public Customer getCustomer(){ return customer;}
     public String getSeatType() { return seatType;}
     public double getPrice(){ return price; }
+    public ReservationStatus getStatus() { return status;}
+    public void setStatus(ReservationStatus status){ this.status = status; }
 
     public void purchase(){
         // is crew available?
@@ -43,9 +45,11 @@ public class Ticket{
             return;
         }
 
-        // decrement plane capacity
-        // add this method to PLANE
-        flight.getPlane().decrementCapacity();
+        // reserve a seat FIRST and verify success (safer than checking count separately)
+        if (!flight.getPlane().decrementCapacity()) {
+            System.out.println("Seat reservation failed (flight became full).");
+            return;
+        }
 
         // customer books the ticket.
         customer.bookTicket(this);

@@ -35,6 +35,7 @@ public class Customer{
     public void setEmail(String email) { this.email = email; }
     public void setBalance(double balance) { this.balance = balance; }
 
+
     public void bookTicket(Flight flight, double price){
         // first check if the flight's plane is operable and there are seats
         // on the plane
