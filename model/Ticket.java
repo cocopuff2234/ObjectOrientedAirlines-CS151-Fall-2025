@@ -16,17 +16,10 @@ public class Ticket{
         this.seatType = seatType;
     }
 
-    public Flight getFlight(){
-        return flight;
-    }
-
-    public Customer getCustomer(){
-        return customer;
-    }
-
-    public String getSeatType() {
-        return seatType;
-    }
+    public Flight getFlight(){ return flight;}
+    public Customer getCustomer(){ return customer;}
+    public String getSeatType() { return seatType;}
+    public double getPrice(){ return price; }
 
     public void purchase(){
         // is crew available?
