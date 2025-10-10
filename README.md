@@ -85,20 +85,28 @@ Every flight needs their flight attendants to ensure customer has a comfortable 
 - canOperate - check if flight attendant is trained for aircraft
 - addCabinQualification - if flight attendant has completed training for another plane type
   
-  
-# Installation Instructions
+## Installation
+1. **Clone the repository**  
+   git clone https://github.com/cocopuff2234/ObjectOrientedAirlines-CS151-Fall-2025.git
+   cd ObjectOrientedAirlines-CS151-Fall-2025
+   
+2. **Compile, or at this step alternatively open with IDE of choice and run Main**
+  javac -d out src/Main.java src/model/*.java src/model/enums/*.java
 
+3. **Run the program**
+  java -cp out Main
+  
 # Usage
 The Object-Oriented Airlines Client has a text-based UI that flyers interact with.  
 The client first prompts the user with what operation they would like to perform.  
 The available operations include:
 
-- 1. Book a Flight  
-- 2. Cancel a Flight  
-- 3. Check Flight Status  
-- 4. See Available Flights  
-- 5. See Existing Reservations  
-- 6. Exit  
+- Book a Flight  
+- Cancel a Flight  
+- Check Flight Status  
+- See Available Flights  
+- See Existing Reservations  
+- Exit  
 
 After selecting an option, the program follows these paths:
 
@@ -123,4 +131,4 @@ After selecting an option, the program follows these paths:
   Closes the application.
 
 # Contributions
-Erik - Customer class, Ticket class, seat type methods and attributes in Plane class, debugging in main
+Erik - Customer class, Ticket class, seat type methods and attributes in Plane class, debugging in main, README Overview, Design (first two classes), Installation, Usage, Presentation Slides.
