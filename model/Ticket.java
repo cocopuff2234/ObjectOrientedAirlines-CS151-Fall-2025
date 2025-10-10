@@ -42,7 +42,7 @@ public class Ticket{
             return;
         }
         // seat available?
-        if(flight.getCapacity() <= 0){
+        if(flight.getAvailableSeats() <= 0){
             System.out.println("There are no seats left on the plane. Please exit and try again later.");
             return;
         }
