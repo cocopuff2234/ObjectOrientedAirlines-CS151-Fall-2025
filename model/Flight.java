@@ -20,6 +20,7 @@ public class Flight implements Notifiable{
     private LocalDateTime arrivalUTC;
     private String gate;
     private final PlaneType planeType;
+    private final Plane plane;
     private Pilot captain;
     private Pilot firstOfficer;
     private final List<FlightAttendant> attendants = new ArrayList<>();
@@ -81,6 +82,7 @@ public class Flight implements Notifiable{
     public String getGate() { return gate; }
     public void setGate(String gate) { this.gate = gate; }
     public PlaneType getPlaneType() { return planeType ;}
+    public Plane getPlane(){ return plane; }
     public Pilot getCaptain() { return captain;}
     public void setCaptain(Pilot captain) { this.captain = captain; }
     public Pilot getFirstOfficer() { return firstOfficer; }
