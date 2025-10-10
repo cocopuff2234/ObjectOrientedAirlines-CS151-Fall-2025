@@ -11,17 +11,17 @@ The customers are the heart of Object-Oriented Airlines. Without them we could n
 The Customer is defined in our client by 6 different attributes and 3 different methods:
 
 ### Attributes
-customerID - unique identifier of the customer
-name - customer’s name
-phoneNumber - customer’s phone number
-Email - customer’s email address
-ticketList - list of tickets the customer has purchased
-Balance - balance the customer owes from the tickets purchased
+- customerID - unique identifier of the customer
+- name - customer’s name
+- phoneNumber - customer’s phone number
+- Email - customer’s email address
+- ticketList - list of tickets the customer has purchased
+- Balance - balance the customer owes from the tickets purchased
 
 ### Methods
-bookTicket - given a flight and price, this method books a ticket for the customer
-cancelTicket - given a ticket object, this method cancels a customer’s ticket 
-seeTickets - returns the list of tickets a customer has purchased
+- bookTicket - given a flight and price, this method books a ticket for the customer
+- cancelTicket - given a ticket object, this method cancels a customer’s ticket 
+- seeTickets - returns the list of tickets a customer has purchased
 
 ## Ticket - Erik 
 
@@ -30,12 +30,12 @@ Airlines revolve around tickets, without them we could not link our business wit
 The Ticket class is defined in our client by 6 different attributes and 3 different methods:
 
 ### Attributes:
-ticketId - Unique identifier of the ticket
-price - price of the ticket
-flight - flight the ticket is associated with 
-customer - customer the ticket is associated with 
-status - status of the ticket
-seatType - seat type the ticket reserves
+- ticketId - Unique identifier of the ticket
+- price - price of the ticket
+- flight - flight the ticket is associated with 
+- customer - customer the ticket is associated with 
+- status - status of the ticket
+- seatType - seat type the ticket reserves
 
 # Installation Instructions
 
