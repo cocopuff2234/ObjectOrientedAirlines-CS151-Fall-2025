@@ -1,9 +1,9 @@
 package model;
-
 import model.enums.ReservationStatus;
 
 public class Ticket{
     private int ticketId; 
+    private static int nextTicketId = 1;
     private double price;
     private Flight flight;
     private Customer customer;
@@ -11,12 +11,15 @@ public class Ticket{
     private ReservationStatus status;
     private String seatType;
 
+    private int generateTicketId() {
+        return nextTicketId++;
+    }
 
-
-    public Ticket(String seatType, Flight flight, Customer customer, double price){
+    public Ticket(String seatType, Flight flight, Customer customer){
+        this.ticketId = generateTicketId();
         this.flight = flight;
         this.customer = customer;
-        this.price = price;
+        this.price = flight.getPlane().getPrice(seatType);;
         this.status = ReservationStatus.PENDING;
         this.seatType = seatType;
     }
@@ -81,7 +84,7 @@ public class Ticket{
         // remove the ticket from the customer's list of tickets
         customer.cancelTicket(this);
         // increment number of seats on the plane
-        flight.getPlane().incrementCapacity();
+        flight.getPlane().releaseSeat(seatType);
     }
 
     public void upgradeTicket(String newSeatType, double newPrice) {

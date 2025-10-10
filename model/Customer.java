@@ -36,11 +36,12 @@ public class Customer{
     public void setBalance(double balance) { this.balance = balance; }
 
 
-    public void bookTicket(Flight flight, double price){
+    public void bookTicket(Flight flight){
         // first check if the flight's plane is operable and there are seats
         // on the plane
         if (flight.getPlane().isOperable() && flight.getPlane().getCapacity() > 0) {
-            Ticket ticket = new Ticket("Economy", flight, this, price);
+            double price = flight.getPlane().getPrice("Economy");
+            Ticket ticket = new Ticket("Economy", flight, this);
             ticketList.add(ticket);
             balance += price;
             flight.getPlane().decrementCapacity();
