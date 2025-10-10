@@ -88,18 +88,23 @@ public class Ticket{
     }
 
     public void upgradeTicket(String newSeatType, double newPrice) {
-        if (flight.getPlane().getCapacity() <= 0) {
-            System.out.println("No seats available for upgrade.");
+        if (!flight.getPlane().reserveSeat(newSeatType)) {
+            System.out.println("No seats available for upgrade to " + newSeatType + ".");
             return;
         }
 
+        // Release the old seat
+        flight.getPlane().releaseSeat(seatType);
+
+        double updatedPrice = flight.getPlane().getPrice(newSeatType);
+
         // adjust customer balance if upgrading costs more
-        if (newPrice > price) {
-            customer.setBalance(customer.getBalance() + (newPrice - price));
+        if (updatedPrice > price) {
+            customer.setBalance(customer.getBalance() + (updatedPrice - price));
         }
 
         seatType = newSeatType;
-        price = newPrice;
+        price = updatedPrice;
 
         System.out.println("Ticket upgraded to " + seatType + " for flight " + flight.getFlightNumber());
     }

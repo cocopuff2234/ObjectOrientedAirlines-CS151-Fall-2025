@@ -176,7 +176,7 @@ public class Flight implements Notifiable{
     // Add a ticket and decrement plane capacity
     public void addTicket(Ticket ticket) {
         require(ticket != null, "Ticket must not be null");
-        require(plane.decrementCapacity(), "Flight is full");
+        require(plane.reserveSeat(ticket.getSeatType()), "No seats available for this type");
         tickets.add(ticket);
         // planeType.getPlane().decrementCapacity();
     }
@@ -184,7 +184,7 @@ public class Flight implements Notifiable{
     // Remove a ticket and increment plane capacity
     public boolean removeTicket(Ticket ticket) {
         boolean removed = tickets.remove(ticket);
-        if (removed) plane.incrementCapacity(); // use plane instance
+        if (removed) plane.releaseSeat(ticket.getSeatType()); // use plane instance
         return removed;
     }
 
