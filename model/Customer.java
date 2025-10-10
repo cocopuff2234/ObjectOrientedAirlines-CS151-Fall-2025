@@ -76,5 +76,6 @@ public class Customer{
                         ", Status: " + ticket.getStatus());
             }
         }
+    }
 
 }
