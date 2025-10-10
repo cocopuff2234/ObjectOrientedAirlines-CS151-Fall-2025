@@ -1,4 +1,6 @@
 import model.Flight;
+import model.Customer;
+import model.Ticket;
 import java.time.LocalDateTime;
 
 public class Main{

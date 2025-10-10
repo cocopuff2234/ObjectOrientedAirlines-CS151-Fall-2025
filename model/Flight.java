@@ -24,6 +24,7 @@ public class Flight implements Notifiable{
     private Pilot firstOfficer;
     private final List<FlightAttendant> attendants = new ArrayList<>();
     private final int minAttendants;
+    private final List<Ticket> tickets = new ArrayList<>();
 
     // --- instance limit control ---
     private static final int MAXIMUM_INSTANCES = 100;
@@ -60,7 +61,7 @@ public class Flight implements Notifiable{
                 "Cannot create more than " + MAXIMUM_INSTANCES + " Flight instances.");
         }
         instanceCount++;
-        
+
         this.flightNumber = Objects.requireNonNull(flightNumber);
         this.airline = Objects.requireNonNull(airline);
         this.origin = Objects.requireNonNull(origin);
@@ -86,8 +87,9 @@ public class Flight implements Notifiable{
     public void setFirstOfficer(Pilot firstOfficer) { this.firstOfficer = firstOfficer;}
     public List<FlightAttendant> getAttendants() { return Collections.unmodifiableList(attendants); }
     public int getMinAttendants() { return minAttendants; }
+    public List<Ticket> getTickets() { return Collections.unmodifiableList(tickets); }
 
-    // -------- Crew assignment methods -------- 
+    // -------- Crew assignment methods --------
     public void assignCaptain(Pilot p){
         require(p != null, "Captain assignment must not be NULL");
         require(p.getStatus() == CrewStatus.AVAILABLE, "Captain must not be ON LEAVE or SUSPENDED");
@@ -155,7 +157,7 @@ public class Flight implements Notifiable{
         ));
     }
 
-    // Reassign gate and notify 
+    // Reassign gate and notify
     public void changeGate(String newGate){
         String oldGate = this.gate;
         this.gate = Objects.requireNonNull(newGate);
@@ -168,6 +170,32 @@ public class Flight implements Notifiable{
         } else {
             notify("Gate remains the same (" + newGate + ")");
         }
+    }
+
+    // Add a ticket and decrement plane capacity
+    public void addTicket(Ticket ticket) {
+        require(ticket != null, "Ticket must not be null");
+        tickets.add(ticket);
+        planeType.getPlane().decrementCapacity();
+    }
+
+    // Remove a ticket and increment plane capacity
+    public boolean removeTicket(Ticket ticket) {
+        boolean removed = tickets.remove(ticket);
+        if (removed) {
+            planeType.getPlane().incrementCapacity();
+        }
+        return removed;
+    }
+
+    // Get available seats
+    public int getAvailableSeats() {
+        return planeType.getPlane().getCapacity();
+    }
+
+    // Check if seats available for a seat type
+    public boolean hasSeats(String seatType) {
+        return getAvailableSeats() > 0;
     }
 
     // UTILITY: Require method for validation throughout this class
