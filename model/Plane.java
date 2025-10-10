@@ -16,23 +16,37 @@ public class Plane {
     private final PlaneType planeType;
     private final int capacity;
     private int availableSeats;
+    private int firstClassSeats;
+    private int economySeats;
+    private int availableFirstClassSeats;
+    private int availableEconomySeats;
+    private final double firstClassPrice;
+    private final double economyPrice;
 
     /**
      * @param planeId    stable identifier (e.g., "P001")
      * @param planeType  aircraft type enum (provides seat layout hints/range)
      * @param capacity   total number of seats available for sale
      */
-    public Plane(String planeId, PlaneType planeType, int capacity) {
+    public Plane(String planeId, PlaneType planeType, int capacity, double firstClassPrice, double economyPrice) {
         this.planeId = planeId;
         this.planeType = planeType;
         this.capacity = capacity;
         this.availableSeats = Math.max(0, capacity);
+        this.firstClassPrice = firstClassPrice;
+        this.economyPrice = economyPrice;
     }
 
     public String getPlaneId() { return planeId; }
     public PlaneType getPlaneType() { return planeType; }
     public int getCapacity() { return capacity; }
     public int getAvailableSeats() { return availableSeats; }
+    public int getAvailableFirstClassSeats() { return availableFirstClassSeats; }
+    public int getAvailableEconomySeats() { return availableEconomySeats; }
+    public int getFirstClassSeats() { return firstClassSeats; }
+    public int getEconomySeats() { return economySeats; }
+    public double getFirstClassPrice() { return firstClassPrice; }
+    public double getEconomyPrice() { return economyPrice; }
 
 
     // Reserve one seat if available. Returns true if success, false if full. 
@@ -107,6 +121,42 @@ public class Plane {
         if (obj == null || getClass() != obj.getClass()) return false;
         Plane other = (Plane) obj; // casting
         return Objects.equals(planeId, other.planeId);
+    }
+
+    // Reserve a seat of the given type ("first" or "economy").
+    // Returns true if a seat was successfully reserved, false otherwise.
+    public boolean reserveSeat(String seatType) {
+        if ("first".equalsIgnoreCase(seatType)) {
+            if (availableFirstClassSeats > 0 && availableSeats > 0) {
+                availableFirstClassSeats--;
+                availableSeats--;
+                return true;
+            }
+            return false;
+        } else if ("economy".equalsIgnoreCase(seatType)) {
+            if (availableEconomySeats > 0 && availableSeats > 0) {
+                availableEconomySeats--;
+                availableSeats--;
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    // Release a seat of the given type ("first" or "economy").
+    public void releaseSeat(String seatType) {
+        if ("first".equalsIgnoreCase(seatType)) {
+            if (availableFirstClassSeats < firstClassSeats && availableSeats < capacity) {
+                availableFirstClassSeats++;
+                availableSeats++;
+            }
+        } else if ("economy".equalsIgnoreCase(seatType)) {
+            if (availableEconomySeats < economySeats && availableSeats < capacity) {
+                availableEconomySeats++;
+                availableSeats++;
+            }
+        }
     }
 }
 
