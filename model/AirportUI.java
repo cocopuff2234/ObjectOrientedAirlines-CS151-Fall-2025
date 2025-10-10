@@ -17,11 +17,9 @@ public class AirportUI {
 
     public void start() {
         while (true) {
-            System.out.println("\nWelcome to Object-Oriented Airlines");
-            System.out.println("-----------------------------------------------");
-            System.out.println("Please select what you would like to do:");
-            System.out.println("1. Book a Flight");
-            System.out.println("2. Cancel a Flight");
+            System.out.println("Welcome. Please select what you would like to do:");
+            System.out.println("1. Book Flight");
+            System.out.println("2. Cancel Flight");
             System.out.println("3. Check Flight Status");
             System.out.println("4. See Available Flights");
             System.out.println("5. See Existing Reservations");
@@ -37,12 +35,11 @@ public class AirportUI {
                 case "4": seeAvailableFlights(); break;
                 case "5": seeReservations(); break;
                 case "6": System.out.println("Goodbye!"); return;
-                default: System.out.println("Invalid choice, try again.");
+                default: System.out.println("Invalid choice");
             }
         }
     }
 
-    // ---------------- Booking ----------------
     private void bookFlight() {
         try {
             System.out.print("Enter departure date (YYYY-MM-DD): ");
@@ -55,7 +52,6 @@ public class AirportUI {
             System.out.print("Enter arrival airport: ");
             String destination = scanner.nextLine();
 
-            // Find matching flights
             List<Flight> matches = new ArrayList<>();
             for (Flight f : flights) {
                 if (f.getOrigin().equalsIgnoreCase(origin) &&
@@ -89,7 +85,6 @@ public class AirportUI {
             System.out.print("Enter your email: ");
             String email = scanner.nextLine();
 
-            // Find or create customer
             Customer customer = null;
             for (Customer c : customers) {
                 if (c.getName().equalsIgnoreCase(name) &&
@@ -104,18 +99,15 @@ public class AirportUI {
                 customers.add(customer);
             }
 
-            // Ask for seat
-            System.out.print("Enter seat number (e.g., 12A): ");
+            System.out.print("Enter seat number (ex. 12A): ");
             String seatNum = scanner.nextLine();
             System.out.print("Enter seat class (Economy/Business/First): ");
             String seatClass = scanner.nextLine();
             Seat seat = new Seat(seatNum, seatClass);
 
-            // Price (simple fixed for now)
             double price = 150.0;
             Ticket ticket = new Ticket(seat, flight, customer, price);
 
-            // Add ticket to customer
             customer.addTicket(ticket);
 
             System.out.println("Flight booked successfully for " + customer.getName() +
@@ -126,7 +118,6 @@ public class AirportUI {
         }
     }
 
-    // ---------------- Cancel flight ----------------
     private void cancelFlight() {
         System.out.print("Enter your name: ");
         String name = scanner.nextLine();
@@ -164,11 +155,10 @@ public class AirportUI {
         if (sel <= 0 || sel > tickets.size()) return;
 
         Ticket t = tickets.get(sel - 1);
-        t.cancel(); // mark as cancelled
+        t.cancel();
         System.out.println("Ticket canceled successfully.");
     }
 
-    // ---------------- Check flight status ----------------
     private void checkFlightStatus() {
         System.out.print("Enter flight number: ");
         String number = scanner.nextLine();
@@ -195,7 +185,6 @@ public class AirportUI {
                 ". Status: " + status);
     }
 
-    // ---------------- See available flights ----------------
     private void seeAvailableFlights() {
         System.out.println("All flights:");
         for (Flight f : flights) {
@@ -206,7 +195,6 @@ public class AirportUI {
         }
     }
 
-    // ---------------- See existing reservations ----------------
     private void seeReservations() {
         System.out.print("Enter your name: ");
         String name = scanner.nextLine();
