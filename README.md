@@ -22,6 +22,7 @@ The Customer is defined in our client by 6 different attributes and 3 different 
 - bookTicket - given a flight and price, this method books a ticket for the customer
 - cancelTicket - given a ticket object, this method cancels a customer’s ticket 
 - seeTickets - returns the list of tickets a customer has purchased
+- generateCustomerId - generates the next customer id
 
 ## Ticket - Erik 
 
@@ -38,7 +39,10 @@ The Ticket class is defined in our client by 6 different attributes and 3 differ
 - seatType - seat type the ticket reserves
 
 ### Methods
-
+- generateTicketId - creates the ID of the ticket booked
+- purchase - purchases a ticket, checking resources
+- cancel - cancels the ticker
+- upgradeTicket - upgrades booked ticket
 
 ## Crew - Sajid
 We need a qualified crew assigned to our flights to ensure a smooth operation so our customer lands at their destination safely.
