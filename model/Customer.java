@@ -4,12 +4,17 @@ import java.util.ArrayList;
 
 public class Customer{
     private int customerId;
+    private static int nextCustomerId = 1;
     private String name;
     private String phoneNumber;
     private String email;
     // List of tickets a customer has
     private List<Ticket> ticketList;
     private double balance;
+
+    private int generateCustomerId() {
+        return nextCustomerId++;
+    }
 
     // constructors
     public Customer(String name, String phoneNumber, String email){
