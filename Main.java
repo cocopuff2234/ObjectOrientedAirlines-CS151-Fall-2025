@@ -1,5 +1,6 @@
 import model.*;
 import model.enums.*;
+import ui.AirportUI;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,6 +9,9 @@ import java.util.List;
 import java.util.Set;
 
 public class Main {
+    private static final double FIRST_CLASS_PRICE = 200.0;
+    private static final double ECONOMY_PRICE = 100.0;
+
     public static void main(String[] args) {
         List<Flight> flights = new ArrayList<>();
         List<Airport> airports = new ArrayList<>();
@@ -26,11 +30,11 @@ public class Main {
         airports.add(lhr);
 
         //Planes
-        Plane p1 = new Plane("PL001", PlaneType.A320, PlaneType.A320.getTypicalSeats(), 200.0, 100.0);
-        Plane p2 = new Plane("PL002", PlaneType.B737, PlaneType.B737.getTypicalSeats(), 200.0, 100.0);
-        Plane p3 = new Plane("PL003", PlaneType.A320, PlaneType.A320.getTypicalSeats(), 200.0, 100.0);
-        Plane p4 = new Plane("PL004", PlaneType.B737, PlaneType.B737.getTypicalSeats(), 200.0, 100.0);
-        Plane p5 = new Plane("PL005", PlaneType.A320, PlaneType.A320.getTypicalSeats(), 200.0, 100.0);
+        Plane p1 = new Plane("PL001", PlaneType.A320, PlaneType.A320.getTypicalSeats(), FIRST_CLASS_PRICE, ECONOMY_PRICE);
+        Plane p2 = new Plane("PL002", PlaneType.B737, PlaneType.B737.getTypicalSeats(), FIRST_CLASS_PRICE, ECONOMY_PRICE);
+        Plane p3 = new Plane("PL003", PlaneType.A320, PlaneType.A320.getTypicalSeats(), FIRST_CLASS_PRICE, ECONOMY_PRICE);
+        Plane p4 = new Plane("PL004", PlaneType.B737, PlaneType.B737.getTypicalSeats(), FIRST_CLASS_PRICE, ECONOMY_PRICE);
+        Plane p5 = new Plane("PL005", PlaneType.A320, PlaneType.A320.getTypicalSeats(), FIRST_CLASS_PRICE, ECONOMY_PRICE);
 
         //Flights
         flights.add(new Flight("AA001", "American Airlines", "New York", "Los Angeles",
@@ -57,7 +61,7 @@ public class Main {
         //Assign flights
         for (Flight f : flights) {
             airports.stream()
-                    .filter(a -> a.getAirportName().equals(f.getOrigin()) || a.getAirportName().equals(f.getDestination()))
+                    .filter(a -> a.getAirportId().equals(f.getOrigin()) || a.getAirportId().equals(f.getDestination()))
                     .forEach(a -> a.scheduleFlight(f));
         }
 
