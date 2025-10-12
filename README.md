@@ -88,6 +88,42 @@ Every flight needs their flight attendants to ensure customer has a comfortable 
 ## Methods 
 - canOperate - check if flight attendant is trained for aircraft
 - addCabinQualification - if flight attendant has completed training for another plane type
+
+## Flight - Sajid
+Flights are scheduled with the plane and allocation of crew members so a customer can book them
+
+### Attributes:
+- flightNumber – the unique flight identifier
+- airline – the airline operating the flight
+- origin – the departure airport code
+- destination – the arrival airport code
+- departureUTC – the scheduled departure time (LocalDateTime)
+- arrivalUTC – the scheduled arrival time (LocalDateTime)
+- gate – the departure gate for the flight
+- plane – the Plane assigned to this flight
+- captain – the Pilot serving as captain
+- firstOfficer – the Pilot serving as first officer
+- attendants – list of FlightAttendant crew members
+- tickets – list of Ticket objects for passengers
+- minAttendants – the minimum number of flight attendants required
+- MAXIMUM_INSTANCES – the maximum number of Flight instances allowed
+- instanceCount – the current number of created Flight instances
+
+## Methods
+- assignCaptain(Pilot p) – assigns a pilot as captain
+- assignFirstOfficer(Pilot p) – assigns a pilot as first officer
+- addAttendant(FlightAttendant fa) – adds a flight attendant to the crew
+- removeAttendant(FlightAttendant fa) – removes a flight attendant from the crew
+- hasRequiredCrew() – checks if the flight has enough crew
+- getDuration() – returns the flight duration as a Duration
+- notify(String message) – sends a notification
+- delayByMinutes(long minutes) – delays the flight by the specified minutes
+- changeGate(String newGate) – changes the flight’s gate
+- addTicket(Ticket ticket) – adds a ticket to the flight
+- removeTicket(Ticket ticket) – removes a ticket and returns whether it was successful
+- getAvailableSeats() – returns the number of remaining available seats
+- hasSeats(String seatType) – checks if seats of a given type are available
+- require(boolean condition, String message) – verifies a condition and throws an exception if false
   
 ## Installation
 1. **Clone the repository**  
