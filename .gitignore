@@ -1,0 +1,35 @@
+# Compiled class files
+*.class
+out/
+bin/
+build/
+target/
+
+# JUnit library files
+lib/
+
+# IDE specific files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Package files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Except JUnit jar if it's committed
+!lib/junit-*.jar
