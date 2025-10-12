@@ -4,6 +4,54 @@ The Object-Oriented Airlines client allows for flyers to perform operations to i
 
 # Design: Our Classes
 
+## Airport - Ryuto
+
+Airports are essential infrastructure for managing flight operations. Each airport handles multiple flights, assigns gates, and coordinates departures to ensure smooth operations.
+
+The Airport class is defined in our client by 5 different attributes and 5 different methods:
+
+### Attributes
+- airportId - unique identifier for the airport (e.g., "JFK", "SFO")
+- airportName - full name of the airport (e.g., "New York JFK", "San Francisco International")
+- terminals - list of terminal names available at the airport
+- gates - set of gate identifiers available for flight assignments
+- scheduledFlights - set of flights scheduled to depart from or arrive at this airport
+
+### Methods
+- scheduleFlight - registers a flight that involves this airport as origin or destination
+- assignGate - assigns an available gate to a flight, ensuring no conflicts with other flights at the same time
+- releaseGate - releases a gate after the flight departs, making it available for other flights
+- flightsDepartingOn - returns a list of flights departing from this airport on a specific date, sorted by departure time
+- findAvailableGate - finds the first available gate at a given time, checking for scheduling conflicts
+
+## Plane - Ryuto
+
+The aircraft are the backbone of our airline operations. Each plane has specific capacity, seat configurations, and pricing tiers to accommodate different customer needs.
+
+The Plane class is defined in our client by 10 different attributes and 8 different methods:
+
+### Attributes
+- planeId - unique identifier for the aircraft
+- planeType - aircraft type enum (e.g., A320, B737, B787) containing manufacturer details and specifications
+- capacity - total number of seats available on the aircraft
+- availableSeats - current number of unbooked seats
+- firstClassSeats - total number of first class seats (20% of capacity)
+- economySeats - total number of economy seats (80% of capacity)
+- availableFirstClassSeats - current number of available first class seats
+- availableEconomySeats - current number of available economy seats
+- firstClassPrice - price per first class seat
+- economyPrice - price per economy seat
+
+### Methods
+- reserveSeat - reserves a seat of specified type (first class or economy), returns true if successful
+- releaseSeat - releases a reserved seat back into available inventory
+- decrementCapacity - decrements the overall available seat count, returns false if plane is full
+- incrementCapacity - increments available seat count when a booking is cancelled
+- getPrice - returns the price for a given seat type
+- seatCodes - generates deterministic seat codes (e.g., "A1", "B2") based on PlaneType layout
+- isOperable - checks if the plane is operational and ready for flight
+- defaultSeatLetters - returns the default seat letter configuration based on aircraft type
+
 ## Customer - Erik
 
 The customers are the heart of Object-Oriented Airlines. Without them we could not do what we do. So naturally, we made sure to account for them well. 
@@ -172,3 +220,4 @@ After selecting an option, the program follows these paths:
 
 # Contributions
 Erik - Customer class, Ticket class, seat type methods and attributes in Plane class, debugging in main, README Overview, Design (first two classes), Installation, Usage, Presentation Slides.
+Ryuto - Airport class, Plane class, seat management system (first class/economy split), gate assignment and scheduling logic, price management, UML diagram, code review and refactoring, README Design (Airport and Plane sections).
