@@ -21,12 +21,12 @@ public class FlightTest {
         );
 
         Pilot captain = new Pilot(
-            "P001", "Captain One", java.time.LocalDate.now().minusYears(5), "SFO",
+            "P001", "John Captain", java.time.LocalDate.now().minusYears(5), "SFO",
             PilotRank.CAPTAIN, EnumSet.of(PlaneType.A320), 5000
         );
 
         Pilot fo = new Pilot(
-            "P002", "First Officer Two", java.time.LocalDate.now().minusYears(2), "SFO",
+            "P002", "John Officer", java.time.LocalDate.now().minusYears(2), "SFO",
             PilotRank.FIRST_OFFICER, EnumSet.of(PlaneType.A320), 2500
         );
 
