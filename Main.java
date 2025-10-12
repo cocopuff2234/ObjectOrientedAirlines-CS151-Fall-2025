@@ -1,5 +1,6 @@
 import model.*;
 import model.enums.*;
+import ui.AirportUI;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,43 +9,63 @@ import java.util.List;
 import java.util.Set;
 
 public class Main {
+    private static final double FIRST_CLASS_PRICE = 200.0;
+    private static final double ECONOMY_PRICE = 100.0;
+
     public static void main(String[] args) {
         List<Flight> flights = new ArrayList<>();
+        List<Airport> airports = new ArrayList<>();
 
-        // Planes
-        Plane p1 = new Plane("PL001", PlaneType.A320, PlaneType.A320.getTypicalSeats(), 200.0, 100.0);
-        Plane p2 = new Plane("PL002", PlaneType.B737, PlaneType.B737.getTypicalSeats(), 200.0, 100.0);
-        Plane p3 = new Plane("PL003", PlaneType.A320, PlaneType.A320.getTypicalSeats(), 200.0, 100.0);
-        Plane p4 = new Plane("PL004", PlaneType.B737, PlaneType.B737.getTypicalSeats(), 200.0, 100.0);
-        Plane p5 = new Plane("PL005", PlaneType.A320, PlaneType.A320.getTypicalSeats(), 200.0, 100.0);
+        //Airports
+        Airport jfk = new Airport("JFK", "New York JFK", List.of("T1", "T2"), Set.of("A1", "A2", "A3"));
+        Airport ord = new Airport("ORD", "Chicago O'Hare", List.of("T1", "T2"), Set.of("B1", "B2"));
+        Airport sfo = new Airport("SFO", "San Francisco", List.of("T1"), Set.of("C1", "C2"));
+        Airport dal = new Airport("DAL", "Dallas Love Field", List.of("T1"), Set.of("D1", "D2"));
+        Airport lhr = new Airport("LHR", "London Heathrow", List.of("T1", "T2"), Set.of("E1", "E2", "E3"));
 
-        // Flights
+        airports.add(jfk);
+        airports.add(ord);
+        airports.add(sfo);
+        airports.add(dal);
+        airports.add(lhr);
+
+        //Planes
+        Plane p1 = new Plane("PL001", PlaneType.A320, PlaneType.A320.getTypicalSeats(), FIRST_CLASS_PRICE, ECONOMY_PRICE);
+        Plane p2 = new Plane("PL002", PlaneType.B737, PlaneType.B737.getTypicalSeats(), FIRST_CLASS_PRICE, ECONOMY_PRICE);
+        Plane p3 = new Plane("PL003", PlaneType.A320, PlaneType.A320.getTypicalSeats(), FIRST_CLASS_PRICE, ECONOMY_PRICE);
+        Plane p4 = new Plane("PL004", PlaneType.B737, PlaneType.B737.getTypicalSeats(), FIRST_CLASS_PRICE, ECONOMY_PRICE);
+        Plane p5 = new Plane("PL005", PlaneType.A320, PlaneType.A320.getTypicalSeats(), FIRST_CLASS_PRICE, ECONOMY_PRICE);
+
+        //Flights
         flights.add(new Flight("AA001", "American Airlines", "New York", "Los Angeles",
                 LocalDateTime.of(2025, 10, 1, 14, 30),
                 LocalDateTime.of(2025, 10, 1, 17, 45),
                 p1, 2));
-
         flights.add(new Flight("DL002", "Delta", "Chicago", "Miami",
                 LocalDateTime.of(2025, 10, 2, 9, 15),
                 LocalDateTime.of(2025, 10, 2, 13, 0),
                 p2, 2));
-
         flights.add(new Flight("UA003", "United", "San Francisco", "Seattle",
                 LocalDateTime.of(2025, 10, 3, 16, 0),
                 LocalDateTime.of(2025, 10, 3, 18, 15),
                 p3, 2));
-
         flights.add(new Flight("SW004", "Southwest", "Dallas", "Houston",
                 LocalDateTime.of(2025, 10, 4, 12, 0),
                 LocalDateTime.of(2025, 10, 4, 13, 15),
                 p4, 2));
-
         flights.add(new Flight("BA005", "British Airways", "London", "New York",
                 LocalDateTime.of(2025, 10, 5, 8, 0),
                 LocalDateTime.of(2025, 10, 5, 11, 30),
                 p5, 3));
 
-        // --- Flight 1 Crew (A320) ---
+        //Assign flights
+        for (Flight f : flights) {
+            airports.stream()
+                    .filter(a -> a.getAirportId().equals(f.getOrigin()) || a.getAirportId().equals(f.getDestination()))
+                    .forEach(a -> a.scheduleFlight(f));
+        }
+
+        // Flight 1
         Pilot captain1 = new Pilot("P001", "John Pilot", LocalDate.of(2020,1,15), "JFK",
                 PilotRank.CAPTAIN, Set.of(PlaneType.A320), 5000);
         Pilot firstOfficer1 = new Pilot("P006", "Jane Pilot", LocalDate.of(2021,5,10), "JFK",
@@ -59,7 +80,7 @@ public class Main {
         flight1.addAttendant(fa1);
         flight1.addAttendant(fa2);
 
-        // --- Flight 2 Crew (B737) ---
+        //Flight 2
         Pilot captain2 = new Pilot("P002", "Jane Doe", LocalDate.of(2019,7,10), "ORD",
                 PilotRank.CAPTAIN, Set.of(PlaneType.B737), 6000);
         Pilot firstOfficer2 = new Pilot("P007", "Mike Tyson", LocalDate.of(2020,6,5), "ORD",
@@ -74,7 +95,7 @@ public class Main {
         flight2.addAttendant(fa3);
         flight2.addAttendant(fa4);
 
-        // --- Flight 3 Crew (A320) ---
+        //Flight 3
         Pilot captain3 = new Pilot("P003", "John Adams", LocalDate.of(2021,3,1), "SFO",
                 PilotRank.CAPTAIN, Set.of(PlaneType.A320), 4000);
         Pilot firstOfficer3 = new Pilot("P008", "Big Tony", LocalDate.of(2022,2,10), "SFO",
@@ -89,7 +110,7 @@ public class Main {
         flight3.addAttendant(fa5);
         flight3.addAttendant(fa6);
 
-        // --- Flight 4 Crew (B737) ---
+        //Flight 4
         Pilot captain4 = new Pilot("P004", "Bill Nye", LocalDate.of(2020,11,5), "DAL",
                 PilotRank.CAPTAIN, Set.of(PlaneType.B737), 5500);
         Pilot firstOfficer4 = new Pilot("P009", "Neil Degrasse Tyson", LocalDate.of(2021,12,1), "DAL",
@@ -104,7 +125,7 @@ public class Main {
         flight4.addAttendant(fa7);
         flight4.addAttendant(fa8);
 
-        // --- Flight 5 Crew (A320) ---
+        //Flight 5
         Pilot captain5 = new Pilot("P005", "Tom Brady", LocalDate.of(2018,12,1), "LHR",
                 PilotRank.CAPTAIN, Set.of(PlaneType.A320), 7000);
         Pilot firstOfficer5 = new Pilot("P010", "Steve Harvey", LocalDate.of(2019,7,15), "LHR",
@@ -122,8 +143,8 @@ public class Main {
         flight5.addAttendant(fa10);
         flight5.addAttendant(fa11);
 
-        // Start UI
-        AirportUI ui = new AirportUI(flights);
+        //Starts UI
+        AirportUI ui = new AirportUI(flights, airports);
         ui.start();
     }
 }
