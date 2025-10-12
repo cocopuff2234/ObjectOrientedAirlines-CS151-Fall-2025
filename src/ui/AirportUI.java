@@ -1,4 +1,6 @@
-package model;
+package ui;
+
+import model.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,7 +9,6 @@ import java.util.Scanner;
 public class AirportUI {
     private final List<Flight> flights;
     private final List<Airport> airports;
-    private final Scanner scanner = new Scanner(System.in);
     private Customer currentCustomer;
 
     public AirportUI(List<Flight> flights, List<Airport> airports) {
@@ -16,32 +17,34 @@ public class AirportUI {
     }
 
     public void start() {
-        System.out.println("Welcome to OOP Airlines");
-        System.out.println("-----------------------------------------------");
-        createOrLoginCustomer();
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Welcome to OOP Airlines");
+            System.out.println("-----------------------------------------------");
+            createOrLoginCustomer(scanner);
 
-        boolean exit = false;
-        while (!exit) {
-            System.out.println("\nPlease select an action:");
-            System.out.println("1. Book a Flight");
-            System.out.println("2. Cancel a Ticket");
-            System.out.println("3. See My Tickets");
-            System.out.println("4. Exit");
-            System.out.print("Enter choice: ");
+            boolean exit = false;
+            while (!exit) {
+                System.out.println("\nPlease select an action:");
+                System.out.println("1. Book a Flight");
+                System.out.println("2. Cancel a Ticket");
+                System.out.println("3. See My Tickets");
+                System.out.println("4. Exit");
+                System.out.print("Enter choice: ");
 
-            String choice = scanner.nextLine().trim();
-            switch (choice) {
-                case "1" -> bookFlight();
-                case "2" -> cancelTicket();
-                case "3" -> currentCustomer.seeTickets();
-                case "4" -> exit = true;
-                default -> System.out.println("Invalid choice. Try again.");
+                String choice = scanner.nextLine().trim();
+                switch (choice) {
+                    case "1" -> bookFlight(scanner);
+                    case "2" -> cancelTicket(scanner);
+                    case "3" -> currentCustomer.seeTickets();
+                    case "4" -> exit = true;
+                    default -> System.out.println("Invalid choice. Try again.");
+                }
             }
+            System.out.println("Goodbye!");
         }
-        System.out.println("Goodbye!");
     }
 
-    private void createOrLoginCustomer() {
+    private void createOrLoginCustomer(Scanner scanner) {
         System.out.println("Enter your name:");
         String name = scanner.nextLine().trim();
         System.out.println("Enter your phone number:");
@@ -53,7 +56,7 @@ public class AirportUI {
         System.out.println("Welcome, " + name + "!");
     }
 
-    private void bookFlight() {
+    private void bookFlight(Scanner scanner) {
         System.out.println("\nAvailable flights:");
         for (int i = 0; i < flights.size(); i++) {
             Flight f = flights.get(i);
@@ -96,11 +99,10 @@ public class AirportUI {
                 )
         );
 
-        Ticket ticket = new Ticket(seatType, flight, currentCustomer);
-        ticket.purchase(); // Uses your Customer & Plane methods
+        currentCustomer.bookTicket(flight, seatType);
     }
 
-    private void cancelTicket() {
+    private void cancelTicket(Scanner scanner) {
         List<Ticket> tickets = currentCustomer.getTicketList();
         if (tickets.isEmpty()) {
             System.out.println("You have no tickets to cancel.");
@@ -129,6 +131,6 @@ public class AirportUI {
         }
 
         Ticket ticket = tickets.get(idx);
-        ticket.cancel(); // Uses your Ticket and Customer cancel logic
+        ticket.cancel();
     }
 }
