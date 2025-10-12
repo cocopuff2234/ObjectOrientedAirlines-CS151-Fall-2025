@@ -218,6 +218,14 @@ After selecting an option, the program follows these paths:
 - **Exit:**  
   Closes the application.
 
+# UML diagram (Simplified ver)
+<img width="2932" height="5428" alt="Untitled diagram-2025-10-12-211233" src="https://github.com/user-attachments/assets/fe45c3c1-b4ee-4246-907a-e095914b71d1" />
+
+# UML diagram (Complete ver)
+<img width="8869" height="7032" alt="Untitled diagram-2025-10-11-014847" src="https://github.com/user-attachments/assets/298dac63-2544-4f67-8b6f-96bbf5b1adac" />
+
+
 # Contributions
 Erik - Customer class, Ticket class, seat type methods and attributes in Plane class, debugging in main, README Overview, Design (first two classes), Installation, Usage, Presentation Slides.
+
 Ryuto - Airport class, Plane class, seat management system (first class/economy split), gate assignment and scheduling logic, price management, UML diagram, code review and refactoring, README Design (Airport and Plane sections).
