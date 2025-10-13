@@ -172,7 +172,16 @@ Flights are scheduled with the plane and allocation of crew members so a custome
 - getAvailableSeats() – returns the number of remaining available seats
 - hasSeats(String seatType) – checks if seats of a given type are available
 - require(boolean condition, String message) – verifies a condition and throws an exception if false
-  
+
+## AirportUI - Kenrrick
+AirportUI is the way the flyer interacts with the client. It uses a text-based input & output system to serve the customer.
+
+### Methods
+- start - starts the UI, prompts the flyer with the options on how they would like to begin
+- createOrLoginCustomer - creates a customer object, or finds the existing object
+- bookFlight - books a flight using methods from other classes
+- cancelTicket - cancels a lfight using methods from other classes
+
 ## Installation
 1. **Clone the repository**  
    - git clone https://github.com/cocopuff2234/ObjectOrientedAirlines-CS151-Fall-2025.git
@@ -226,6 +235,6 @@ After selecting an option, the program follows these paths:
 
 
 # Contributions
-Erik - Customer class, Ticket class, seat type methods and attributes in Plane class, debugging in main, README Overview, Design (first two classes), Installation, Usage, Presentation Slides.
+Erik - Customer class, Ticket class, seat type methods and attributes in Plane class, debugging in main, README Overview, Design (Customer and ticket), Installation, Usage, Presentation Slides.
 
 Ryuto - Airport class, Plane class, seat management system (first class/economy split), gate assignment and scheduling logic, price management, UML diagram, code review and refactoring, implement JUnit test for airport class and plane class, README Design (Airport and Plane sections).
