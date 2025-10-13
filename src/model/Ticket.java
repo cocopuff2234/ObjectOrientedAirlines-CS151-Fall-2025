@@ -65,7 +65,7 @@ public class Ticket{
         }
 
         // Customer books the ticket
-        customer.bookTicket(flight);
+        customer.bookTicket(flight, seatType);
 
         // Update status
         status = ReservationStatus.CONFIRMED;
