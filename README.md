@@ -180,7 +180,7 @@ AirportUI is the way the flyer interacts with the client. It uses a text-based i
 - start - starts the UI, prompts the flyer with the options on how they would like to begin
 - createOrLoginCustomer - creates a customer object, or finds the existing object
 - bookFlight - books a flight using methods from other classes
-- cancelTicket - cancels a lfight using methods from other classes
+- cancelTicket - cancels a flight using methods from other classes
 
 ## Installation
 1. **Clone the repository**  
