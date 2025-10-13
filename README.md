@@ -240,3 +240,5 @@ Erik - Customer class, Ticket class, seat type methods and attributes in Plane c
 Ryuto - Airport class, Plane class, seat management system (first class/economy split), gate assignment and scheduling logic, price management, UML diagram, code review and refactoring, implement JUnit test for airport class and plane class, README Design (Airport and Plane sections).
 
 Kenrick - Created UI and created all objects in main to be used when the user is in the UI, and code review.
+
+Sajid - Abstract crew class, Pilot and Flight Attendant class that extend Crew, Flight class that integrates Crew, Ticket and Airport class. Ensuring integration into a Flight object that is bookable by customer along with Unit testing for Flight test.
