@@ -238,3 +238,5 @@ After selecting an option, the program follows these paths:
 Erik - Customer class, Ticket class, seat type methods and attributes in Plane class, debugging in main, README Overview, Design (Customer and ticket), Installation, Usage, Presentation Slides.
 
 Ryuto - Airport class, Plane class, seat management system (first class/economy split), gate assignment and scheduling logic, price management, UML diagram, code review and refactoring, implement JUnit test for airport class and plane class, README Design (Airport and Plane sections).
+
+Kenrick - Created UI and created all objects in main to be used when the user is in the UI, and code review.
